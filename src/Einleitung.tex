@@ -1,0 +1,37 @@
+%!TEX root = ../Bachelorarbeit.tex
+\chapter{Motivation}
+\label{chap:Einleitung}
+
+Die School of Design Thinking (D-School) lehrt die kreative Herangehensweise an Probleme und die Entwicklung einfallsreicher Lösungen. Die Lehre findet in verschiedenen Kursen statt. Studierenden können sich die Grundlagen im Basic-Track vermitteln lassen und anschließend bei erfolgreicher Teilnahme ihr Wissen im  Advanced-Track vertiefen. Neben diesen studentischen Kursen bietet die D-School auch Weiterbildungskurse direkt für Unternehmen an.
+
+In solch einem Kurs wird dann in kleingruppen von ca. 6 Teilnehmern an einem Projekt gearbeitet. Das Projektthema wird dabei entweder von der D-School selbst oder vor allem bei längeren Projekten von externen Projektpartnern vorgeschlagen. 
+
+Während der Arbeit an ihren Projekten durchlaufen die Teilnehmer verschiedene Phasen, welche vom Verstehen und Beobachten des Problemfeldes über die Definition eines Standpunktes und das Finden von Ideen bis hin zu einem Prototyp und dessen Tests reichen. Während dieser verschiedenen Phasen fallen unterschiedlichste Dokumente an, welche die Lösungsfindung dokumentieren.
+
+Im Verlauf des Projektverlaufes kommt es durchaus vor, dass ein Team eine Phase mehrmals durchläuft oder in eine vorherige Phase zurückspringt. Dies erschwert die Organisation der Dokumente, z.B. in einer einfachen hierarchischen Struktur. Weiterhin ist es schwierig allein aus den Dokumenten deren Entstehungsreihenfolge und Bedeutung zu erfassen. Meist entstehen während eines 3 Monate andauernden Projektes verschiedenste Präsentationen, Zusammenfassungen, Prototypen, Bilder von Whiteboards und Interviewdokumentationen. Diese werden meist in der von den Studierenden bevorzugten Art und Weise gespeichert und verwaltet, z.B. mit Hilfe von Dropbox, Google Docs oder Box.
+
+Das Verständnis der Dokumentation ist sowohl für das Projekt selbst zum verstehen und erlernen des Prozesses, als auch als Ideenquelle für zukünftige Projekte wichtig. Ferner sind die erstellten Artefakte nützlich zum Werben um neue Projektpartner, welche die Projekte betreuen.
+
+\section{Zielsetzung von Project-Zoom}
+Project-Zoom soll der Verbesserung der Dokumentation dienen. Dazu sollen die von den Studierenden erzeugten Artefakte durch manuelles Anordnen in eine Form gebracht werden, welche den Prozess der Gruppe visualisiert. Der Staff der D-School kann anschließend diese entstandenen Graphen nutzen um die Projektverläufe zu analysieren und gegebenenfalls den D-School Prozess anpassen.
+
+Für eine reibungslose Integration des Systems ist vor allem die Anbindung an bereits existierende IT-Systeme und die von den Studierenden für das Projekt verwendete Software wichtig. Die Software muss dabei mit moderatem Aufwand angepasst werden können, um andere externe Dienste anbinden zu können.
+
+\section{Abgrenzung}
+Die Arbeit beschreibt und bezieht sich auf das Bachelorprojekt „From Creative Ideas to Well-Founded Engineering“ und das umgesetzte Softwaresystem Project-Zoom. An diesem Projekt haben 6 Studierenden gearbeitet und beschreiben in ihren Bachelorarbeiten das Projekt aus verschiedenen Blickwinkeln mit verschiedenen Schwerpunkten.
+
+Tom Herolds Arbeit \cite{bp-tomh} behandelt die Interaktion mit kontextsensitiven Graphen. Es gilt die Interaktion des Studierenden mit der Nutzeroberfläche so intuitiv wie möglich zu gestallten und den Nutzer bei der Erfassung dokumentationsrelevanter Eigenschaften zu unterstützen.
+
+Die Ausführungen von Anita Diekhoff \cite{bp-anita}  beschäftigen sich mit der ...
+
+Norman Rzepka’s Bachelorarbeit \cite{bp-norman} thematisiert die webbasierte eventgesteuerte clientseitige Architektur von Project-Zoom. Hier wird näher darauf eingegangen, wie die Daten von der DB, über das Backend asynchron an den Client ausgeliefert werden.
+
+Die Bachelorarbeit von Dominic Bräunlein \cite{bp-dome} erläutert das generieren und bereitstellen von semantischen Thumbnails, um dem Nutzer das Erkennen der Dokumente seines Projektes zu erleichtern und somit selbst bei wenig verfügbarem Platz so viele Informationen eines Dokumentes anzeigen zu können. 
+
+Thomas Werkmeister befasst sich in seiner Arbeit \cite{bp-tewe} mit der Anbindung externer Systeme zur Integration von Daten. Diese aggregierte Datenbasis ist die Grundlage für die Wissensbasis und die einzelnen Projekte.
+
+Die Komponenten die in den Arbeiten \cite{bp-tewe} und \cite{bp-dome} beschrieben sind, sind mit dem hier erläuterten Systemteil mittels eines Eventsystems verbunden. Das Client-Frontend ist über eine REST Anbindung an das Server-Backend angeschlossen. Mit der clientseitigen Implementierung der REST Schnittstelle beschäftigt sich \cite{bp-norman}.
+
+\section{Gliederung}
+In dieser Arbeit wird zuerst ein Überblick über das Gesamtsystem gegeben. Dazu werden die Anforderungen der D-School an das Backend analysiert und dienen als Grundlage für die Begründung der Verwendeten Technologien. Anschließend wird die Architektur des Backends näher erläutert. Hier liegt der Hauptfokus zunächst auf einer neuen Art und Weise eine Datenbank an eine Webapplikation anzubinden. Dann werden einige Feinheiten und interessante Stellen der Datenmodellierung von Project-Zoom beleuchtet. Den Abschluss bildet die Architektur technische Grundlage für die Anbindung externer Systeme für die Erweiterung des Systems.
+%\zitat{"`Ein Zitat kann manchmal helfen ;-)"' (\cite{TODO})} 
