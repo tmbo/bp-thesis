@@ -1,5 +1,5 @@
 %!TEX root = ../Bachelorarbeit.tex
-\chapter{Überblick über die Backend-Architektur von Project-Zoom}
+\chapter{Überblick über die Backend-Architektur}
 Im Verlauf des Projektes wurden in Zusammenarbeit mit den D-School Studierenden und dem D-School Staff verschiedene Anforderungen an Project-Zoom als Projektverwaltungs und Dokumentationstool entwickelt \cite{requirements}.  Aus diesen leiten sich dann die verwendeten Technologien und die umgesetzte Architektur ab. Hier aufgeführt sind nur die für diesen Teil des Projektes wichtigsten und relevanten Anforderungen. Diese beziehen sich Hauptsächlich auf die Erweiterbarkeit des Systems.
 
 \section{Systemanforderungen}
@@ -19,10 +19,32 @@ Neben diesen priorisierten Anforderungen gibt es noch eine Reihe weiterer Punkte
 
 \section{Technologieauswahl}
 \subsection{Webanwendung vs. native Applikation}
-Bevor die Implementierung des Projektes beginnen konnte, galt es zu klären welche Technologien verwendet werden. Eine der grundlegenden Entscheidungen war, ob ein Webanwendung oder eine native Anwendung entwickelt wird. Auf Grund der Anforderung der D-School, dass die Anwendung auch außerhalb der D-School Gebäude verwendbar sein muss, liegt eine Webanwendung nahe. Hinzu kommt, dass die Projekt-Mitglieder bereits mit dem Umgang von Webseiten und deren Navigation vertraut sind. Für die Erweiterbarkeit ist dies ebenfalls ein enormer Vorteil, da ein zentrales System gewartet werden kann und neue Funktionen einfach eingespielt werden können. Zudem dreht sich das Projekt um das Thema Dokumentation, bei der oft dazu geneigt wird sie aufzuschieben. Eine Webseite senkt hier die Hemmschwelle und umgeht die Notwendigkeit einer Verteilung und Installation des Programms.
+Bevor die Implementierung des Projektes beginnen konnte, galt es zu klären welche Technologien verwendet werden. Eine der grundlegenden Entscheidungen war, ob ein Webanwendung oder eine native Anwendung entwickelt wird. 
+
+Auf Grund der Anforderung der D-School, dass die Anwendung auch außerhalb der D-School Gebäude verwendbar sein muss, liegt eine Webanwendung nahe. Hinzu kommt, dass die Projekt-Mitglieder bereits mit dem Umgang von Webseiten und deren Navigation vertraut sind. Für die Erweiterbarkeit ist dies ebenfalls ein enormer Vorteil, da ein zentrales System gewartet werden kann und neue Funktionen einfach eingespielt werden können. Zudem dreht sich das Projekt um das Thema Dokumentation, bei der oft dazu geneigt wird sie aufzuschieben. Eine Webseite senkt hier die Hemmschwelle und umgeht die Notwendigkeit einer Verteilung und Installation des Programms.
+
+Eine Trennung der Applikation in Frontend und Backend erlaubt eine klare Funktionstrennung. Für Webapplikationen befindet sich das Backend auf Serverseite und das Frontend befindet sich im Browser auf Clientseite. Die klassischen Aufgaben er beiden Teile sind:
+
+\begin{itemize}
+  \item Backend Aufgaben:
+  \begin{itemize}
+    \item Sammeln und zur Verfügung stellen von Daten
+    \item Kommunikation mit anderen Servern
+    \item Validierung eingehender Daten vom Client
+    \item Speicherung von Daten
+    \item Business Logik
+  \end{itemize}
+
+\item Frontend Aufgaben:
+  \begin{itemize}
+    \item Kommunikation mit dem Backend zur Daten Synchronisation 
+\item Visualisierung der Daten
+    \item Interaktion mit dem Nutzer
+    \item Feedback an den Nutzer
+  \end{itemize}
+\end{itemize}
 
 \subsection{Scala im Web: Play Framework}
-\FloatBarrier
 Die Auswahl der Programmiersprache prägte vor allem der Gedanke eine Sprache zu finden, die einerseits auf benötigte Bibliotheken zugreifen kann und andererseits eine kurze Einarbeitungszeit benötigt. Für die Arbeit mit Thumbnails hat sich die Bibliothek Apache Tika als besonders wertvoll erwiesen. Nähere Informationen zu dieser Bibliothek finden sich in \cite{bp-dome}. Da diese Bibliothek in Java geschrieben ist, musste die Wahl auf eine Sprache fallen welche in der Lage ist Java Bibliotheken anzusprechen. 
 
 Um die verschiedenen Sprachen und ihr jeweiliges Webframework zu evaluieren wurde sich mit den in Tabelle \ref{tab:FrameWorkVergleich} aufgelisteten Kombinationen näher beschäftigt. Dazu wurde von den Backend-Entwicklern jeweils eine kurze Hello-World Anwendung aufgesetzt. Dadurch konnte festgestellt werden, ob der Arbeitsablauf, der Aufwand und der zu erzeugende Quellcode angemessen ist. Neben dieser praktischen kurz Evaluierung wurden einige Fakten zusammengetragen, um die Entscheidung zu erleichtern.
@@ -43,17 +65,20 @@ Um die verschiedenen Sprachen und ihr jeweiliges Webframework zu evaluieren wurd
   \caption {Vergleich von verschiedenen Webframeworks miteinander}
   \label{tab:FrameWorkVergleich}
 \end{table}
+
 In die Nähere Auswahl kamen Java, Groovy und Scala mit den jeweiligen Webframeworks Spring MVC, Grails und Play. Im Gegensatz zu Spring und Grails ist Play ein zustandsloses, schlankes Framework was eine ideale Voraussetzung für ein REST Backend darstellt. Zusätzlich spielten die persönlichen Präferenzen der Entwickler eine Rolle, die bereits Erfahrung in der Kombination Scala und Play hatten.
+
 Scala ist eine Programmiersprache deren Syntax stark an Java orientiert ist. Programme welche in Scala geschrieben sind können bidirektional mit Java Code interagieren und so auf den vollen Funktionsumfang der Java Bibliotheken zurückgreifen. Dabei werden in der Sprache Konzepte der funktionalen mit gewohnten Elementen der objektorientierten Programmierung verknüpft. Es eignet sich somit gut für einen allmählichen Einstieg in die funktionale Programmierung. Die Lernkurve hängt stark von den Vorkenntnissen in Java ab. Durch die starke Ähnlichkeit ist ein Umstieg einfach. Die Verwendung der hinzugekommenen funktionalen Aspekte der Programmiersprache erfolgen nach und nach. Hier empfiehlt es sich frei verfügbare Bücher wie \cite{scala-by-example} zu nutzen.
-\FloatBarrier
+
 \subsection{MongoDB als Datenbanksystem}
 Während der Prototypen Phasen, in der wir die Idee der Umsetzung verfeinerten, stellten wir ein Daten Modell auf. Dieses Modell wird im späteren Verlauf der Arbeit näher beleuchtet. Ein wichtiger Aspekt, der für die Wahl der Datenbank entscheidend ist, sind die verschiedenen anbindbaren externen Systeme. Das Daten Modell muss hier sicherstellen, das Informationen die aus allen Datenquellen verfügbar sind einfach zugänglich sind. Gleichzeitig muss es dafür sorge tragen, dass keine Informationen verloren gehen. Aus diesen Gründen fiel die Entscheidung auf eine NoSQL Datenbank, welche die benötigte Flexibilität ohne großen Aufwand ermöglicht.
 
 Neben MongoDB stand Apache CouchDB als Alternative zur Verfügung. Die Wahl von MongoDB als persistenten Speicher für Project-Zoom fiel vorrangig aufgrund des sehr guten Datenbank Treibers ReactiveMongo für Scala. Dieser erlaubt komplett asynchrone Datenbankzugriffe und gliedert sich deshalb perfekt in das asynchrone Play Framework ein.
 
-Als Dokumentorientierter Datenspeicher passt MongoDB sehr gut zu einer REST Architektur. Die Daten, welche in der Datenbank abgelegt werden, werden im Binary JSON (BSON) format gespeichert. Dieses BSON format ist eine binär encodierte serialisierung von JSON ähnlichen Dokumenten. BSON unterstützt die repräsentation aller Datentypen, welche auch von JSON unterstützt werden, und erlaubt zusätzlich weitere Datentypen. Erweitert wurden die JSON Datentypen unter Anderem um die Unterstützung von Binärdaten und Datumsangaben \cite{bson}. Somit ähnelt die Datenform, die auf Clientseite verarbeitet wird, dem Format der Datenspeicherung in der Datenbank. Diese Konstellation erlaubt die Implementierung einer schlanken Model Schicht, wie sie im Abschnitt Json-Coast-To-Coast (?????) erklärt wird.
+Als Dokumentorientierter Datenspeicher passt MongoDB sehr gut zu einer REST Architektur. Die Daten, welche in der Datenbank abgelegt werden, werden im Binary JSON (BSON) format gespeichert. Dieses BSON format ist eine binär encodierte serialisierung von JSON ähnlichen Dokumenten. BSON unterstützt die repräsentation aller Datentypen, welche auch von JSON unterstützt werden, und erlaubt zusätzlich weitere Datentypen. Erweitert wurden die JSON Datentypen unter Anderem um die Unterstützung von Binärdaten und Datumsangaben \cite{bson}. Somit ähnelt die Datenform, die auf Clientseite verarbeitet wird, dem Format der Datenspeicherung in der Datenbank. Diese Konstellation erlaubt die Implementierung einer schlanken Model Schicht, wie sie im Abschnitt Json-Coast-To-Coast \ref{sec:dcd} erklärt wird.
 
 \subsection{Verwendete Bibliotheken}
+Die Umfangreichsten Bibliotheken, welche im Project-Zoom Backend Core verwendet werden sind Akka, Play und SecureSocial. Nicht hier aufgeführt ist ReactiveMongo als Datenbanktreiber. Diese Bibliothek wird im Abschnitt XXXXX näher erläutert. 
 
 \paragraph{Akka\footnote{http://akka.io}} stellt die Grundlage für das Play Framework dar. Die Library ermöglicht die Nutzung verschiedenester Konzepte des asynchronen Programmierens. Das Ziel ist das schreiben von parallelen, fehler-toleranten und skalierbaren Anwendungen zu vereinfachen \cite{what-is-akka}. 
 
@@ -64,12 +89,12 @@ Neben \tete{Actors} finden auch \tete{Agents} in Project-Zoom Verwendung. Ein Ag
 \paragraph{Play Framework 2.0\footnote{\url{http://playframework.com}}} ist die Weiterentwicklung  und Portierung eines früheren Java Web Frameworks nach Scala. Es ist zwar in Scala programmiert, kann aber sowohl mit Java als auch Scala als Backend Sprache verwendet werden. Play liegt ein Model-View-Controller (MVC) Architektur zugrunde. Hierbei werden in jedem Controller sogenannte Actions definiert und im View verschiedene Templates angelegt. Der Ablauf einer Anfrage an den Webserver verläuft wie folgt:
 
 \begin{enumerate}
-  \item Der default HTTP-Router leitet die Anfrage an eine Action weiter. Diese Weiterleitung basiert auf der Routen die in der Datei conf/routes definiert  sind.
-    \begin{lstlisting}
+  \item Der default HTTP-Router leitet die Anfrage an eine Action weiter. Diese Weiterleitung basiert auf der Routen die in der Datei conf/routes definiert sind.
+\begin{lstlisting}
 GET /projects/:id controllers.ProjectController.read(id: String)
-    \end{lstlisting}
-  Eine Route besteht dabei immer aus der HTTP Methode (GET, POST, HEAD, PUT, DELETE)\cite{play-scala-routing}, einem URI Pattern und einer Action die den Request beantwortet.
-  \item Die Action im Controller ist für die Beantwortung zuständig. Dazu können Informationen im Model abgefragt werden. Die Templates können benutzt werden um ein dynamisches Ergebnis für den Client zu erzeugen.
+\end{lstlisting}
+Eine Route besteht dabei immer aus der HTTP Methode (GET, POST, HEAD, PUT, DELETE)\cite{play-scala-routing}, einem URI Pattern und einer Action die den Request beantwortet.
+\item Die Action im Controller ist für die Beantwortung zuständig. Dazu können Informationen im Model abgefragt werden. Die Templates können benutzt werden um ein dynamisches Ergebnis für den Client zu erzeugen.
 \end{enumerate}
 
 \paragraph{SecureSocial\footnote{\url{http://securesocial.ws}}} handelt den User login. Dieses Paket ist ein Authentifizierungsmodul mit Support für OAuth, OAuth2, OpenID und Username/Passwort Authentifizierung. 
