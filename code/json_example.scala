@@ -3,7 +3,7 @@ val json = Json.obj(
 
 val addUserRole = JsPath.json.update(
   (JsPath \ "role").json.put(JsString("User")))
-// addUserRole : Reads[JsObject]
+//> addUserRole : Reads[JsObject]
 
 val isMajor = 
   (JsPath \ "age").read[Int](min(18))      
