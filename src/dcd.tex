@@ -14,26 +14,26 @@ Die Entwicklung der Datenbankmanagementsysteme bestand viele Jahre lang in der O
 
 \subsection{Datenbanktreiber}
 \label{sec:reactive}
-Für die Anbindung von relationalen Datenbanken gibt es in Java die Java Database Connectivity (JDBC) Schnittstelle. Diese abstrahiert über Datenbanken und deren Treiber indem eine einheitliche API angeboten wird. Ausgerichtet ist JDBC auf relationale Datenbanken \cite{reese2000database}.
+Für die Anbindung von relationalen Datenbanken gibt es in Java die Java Database Connectivity (JDBC). Diese Schnittstelle abstrahiert über Datenbanken und deren Treiber, indem eine einheitliche API angeboten wird. Ausgerichtet ist JDBC auf relationale Datenbanken \cite{reese2000database}.
 
-Um NoSQL Datenbanken anzubinden benötigt man, wie bei JDBC, einen eigenen Treiber. Der Unterschied ist, das es hier keine Abstraktionsebene über verschiedene NoSQL Datenbanken gibt. Dies liegt vorrangig an der sich stark unterscheidenden Struktur der einzelnen Speichersysteme. Die unterschiedlichen NoSQL Datenbanken sind jeweils speziell auf eine bestimmte Aufgabe ausgerichtet, wie z.B. Durchsatz, Verteilte Umgebungen oder Flexible Daten Schemas. 
+Um NoSQL-Datenbanken anzubinden, benötigt man, wie bei JDBC, einen eigenen Treiber. Der Unterschied ist, dass es hier keine Abstraktionsebene über verschiedene NoSQL-Datenbanken gibt. Dies liegt vorrangig an der sich stark unterscheidenden Struktur der einzelnen Speichersysteme. Die unterschiedlichen NoSQL-Datenbanken sind jeweils speziell auf eine bestimmte Aufgabe ausgerichtet, wie z.B. auf Durchsatz, verteilte Umgebungen oder flexible Datenschemas. 
 
-\tete{ReactiveMongo} ist ein asynchroner Datenbanktreiber für MongoDB und die Programmiersprache Scala. Die Vorteile eines asynchronen Treibers liegen auf der Hand: Für jede synchrone Datenbank Abfrage wird normalerweise ein Thread verwendet, der bis zur Antwort blockiert ist. Bei mehreren Datenbankabfragen pro Request werden bei Last viele Threads benötigt um Datenbank abfragen auszuführen. Asynchrone Treiber umgehen dieses Problem indem sie Threads, welche Datenbank Abfragen ausführen, nicht blockieren. Für dieses Konzept ist es Notwendig Platzhalter einzuführen. Diese ersetzen das Ergebnis solange es noch nicht vorhanden ist.
+\tete{ReactiveMongo} ist ein asynchroner Datenbanktreiber für MongoDB und die Programmiersprache Scala. Die Vorteile eines asynchronen Treibers liegen auf der Hand: Für jede synchrone Datenbankabfrage wird normalerweise ein Thread verwendet, der bis zur Antwort blockiert ist. Bei mehreren Datenbankabfragen pro Request werden bei Last viele Threads benötigt, um Datenbankabfragen auszuführen. Asynchrone Treiber umgehen dieses Problem, indem sie Threads, welche Datenbankabfragen ausführen, nicht blockieren. Für dieses Konzept ist es notwendig, Platzhalter einzuführen. Diese ersetzen das Ergebnis, solange es noch nicht vorhanden ist.
 
 \begin{lstlisting}[label=lst:asyncaccess, caption=Funktionssignatur für asynchronen Datenbankzugriff]
 def findOneById(bid: BSONObjectID): Future[Option[Graph]]
 \end{lstlisting}
  
-Im Beispiel \ref{lst:asyncaccess} zeigt die Funktionssignatur den Rückgabetyp \tete{Future[Option[Graph]]}. \tete{Future} ist hierbei genau dieser Platzhalter für ein Ergebnis welches noch nicht existiert. Arbeiten kann man mit einem \tete{Future} durch das Festlegen von Callbacks.
+Im Quelltext \ref{lst:asyncaccess} zeigt die Funktionssignatur den Rückgabetyp \tete{Future[Option[Graph]]}. \tete{Future} ist hierbei ebendieser Platzhalter für ein Ergebnis, welches noch nicht existiert. Um auf das Ergebnis eines \tete{Futures} zu reagieren, können verschiedene \tete{Callbacks} festgelegt werden.
 
 
 \subsection{Manipulation von JSON}
-Das Data Centric Design basiert auf der Idee der direkten Manipulation von Daten. Für eine Umsetzung des Data Centric Designs mit Hilfe von JSON benötigt man somit eine Bibliothek, welche die Möglichkeit bietet, JSON zu transformieren und zu validieren.
+Das data-centric Design basiert auf der Idee der direkten Manipulation von Daten. Für eine Umsetzung des data-centric Designs mit Hilfe von JSON benötigt man somit eine Bibliothek, welche die Möglichkeit bietet, JSON zu transformieren und zu validieren.
  
-Ein Beispiel für solch eine Bibliothek ist Play-JSON. Sie erlaubt das Validieren, Transformieren und Serialisieren. Ein Beispiel ist im Anhang im Quelltextauszug \ref{app:jsonbsp} zu sehen. Dort wird ein JSON Objekt erzeugt, welches anschließend zuerst Transformiert wird indem das Attribut \tete{role} angehangen wird und danach Validiert wird. Bei der Validierung wird überprüft ob der User über 18 Jahre alt ist.
+Eine solche Bibliothek, welche das Validieren, Transformieren und Serialisieren erlaubt, ist Play-JSON. Ein Beispiel, wie solch eine Transformation und Validierung aussieht, ist im Anhang im Quelltextauszug \ref{app:jsonbsp} zu sehen. Dort wird ein JSON-Objekt erzeugt, welches anschließend zuerst transformiert wird, indem das Attribut \tete{role} angehangen wird, und danach validiert wird. Bei der Validierung wird überprüft, ob der Nutzer über 18 Jahre alt ist.
 
-\section{Idee hinter Data Centric Design}
-Das Ziel im Data Centric Design ist die direkte Manipulation von Daten. Der Fokus des Designs liegt auf der Daten Manipulation und dem Datenfluss. Wie bereits in \ref{sec:dcdmotivation} beschrieben, sind Webapplikation Backends immer Häufiger Knotenpunkte in einem mehrere Server durchlaufenden Datenfluss. Ein Teil dieses Datenflusses ist die Kommunikation des Backends mit der Datenbank und dem Client \ref{fig:dataflow}. 
+\section{Idee hinter data-centric Design}
+Das Ziel im data-centric Design ist die direkte Manipulation von Daten. Der Fokus des Designs liegt dabei sowohl auf der Datenmanipulation als auch auf dem Datenfluss. Wie bereits im Abschnitt \ref{sec:dcdmotivation} beschrieben, sind Webapplikation Backends immer Häufiger Knotenpunkte in einem mehrere Server durchlaufenden Datenfluss. Ein Teil dieses Datenflusses, die Kommunikation des Backends mit der Datenbank und dem Client, ist in Abbildung \ref{fig:dataflow} dargestellt. 
 
 \begin{figure}[h]   
   \centering     
@@ -42,16 +42,16 @@ Das Ziel im Data Centric Design ist die direkte Manipulation von Daten. Der Foku
   \label{fig:dataflow} 
 \end{figure}
 
-In diesem Datenfluss soll es keine implizite Umwandlung der Daten in Objekte der Programmiersprache\footnote{Es ist bekannt, das die Repräsentation der Daten des Datenflusses ebenfalls in Objekten der Programmiersprache erfolgt (beispielsweise JSON Objekten). Mit dem Ausdruck ist die Überführung der Daten aus einem Allgemeinen Modell (z.B. JSON) in eine spezifische Objektdarstellung gemeint (z.B. ein Objekt einer User Klasse).} geben. Für ein einfaches durchleiten der Daten aus der Datenbank zum Client oder von einer anderen Webressource zum Client eine Umwandlung nicht notwendig und sinnvoll ist. 
+In diesem Datenfluss soll es keine implizite Umwandlung der Daten in Objekte der Programmiersprache\footnote{Es ist bekannt, dass die Repräsentation der Daten des Datenflusses ebenfalls in Objekten der Programmiersprache erfolgt (beispielsweise JSON-Objekte). Mit dem Ausdruck ist die Überführung der Daten aus einem allgemeinen Modell (z.B. JSON) in eine spezifische Objektdarstellung (z.B. ein Objekt einer User-Klasse) gemeint.} geben. Für ein einfaches Durchleiten der Daten aus der Datenbank zum Client oder von einer anderen Webressource zum Client ist eine Umwandlung nicht notwendig oder sinnvoll. 
 
-Im Gegensatz zu anderen Modellen ist die Abstraktion von der Datenquelle kein Ziel des Data Centric Designs. Das Festlegen auf eine Datenquelle bei der Entwicklung eines Systems erlaubt die Verwendung aller Funktionen die diese Datenquelle zur Verfügung stellt. Beispielsweise erlaubt MongoDB die Verwendung sogenannter Capped Collections.  Diese verhalten sich wie eine zirkuläre Queue mit begrenzter Größe. Viele Datenbanken besitzen spezielle, stark angepasste Funktionen, auf die jedoch meist bei der Verwendung von allgemeinen Datenbank APIs (z.B. JDBC) nicht zugegriffen werden kann. Ein Nachteil dieser engen Kopplung ist, das der Austauschen der Datenquelle dadurch schwieriger ist. 
+Im Gegensatz zu anderen Modellen ist die Abstraktion von der Datenquelle kein Ziel des data-centric Designs. Das Festlegen auf eine Datenquelle bei der Entwicklung eines Systems erlaubt die Verwendung aller Funktionen, die diese Datenquelle zur Verfügung stellt. Beispielsweise erlaubt MongoDB die Verwendung sogenannter \tete{Capped Collections}\footnote{Mehr Informationen zu Capped Collections z.B. auf \url{http://docs.mongodb.org/manual/core/capped-collections/}}, welche auf hohen Durchsatz optimiert sind. Diese verhalten sich wie eine zirkuläre Queue mit begrenzter Größe. Viele Datenbanken besitzen spezielle, stark angepasste Funktionen, auf die jedoch bei der Verwendung von allgemeinen Datenbank APIs (z.B. JDBC) meist nicht zugegriffen werden kann. Ein Nachteil dieser engen Kopplung ist, dass der Austausch der Datenquelle dadurch schwieriger ist. 
 
-Eine Deserialisierung der Daten in Objekte ist für komplizierte Business Logik von Vorteil. Statische Daten Modelle sollten immer dann verwendet werden, wenn die Manipulation der Daten kompliziert wird oder wenn die Verwendung externer Bibliotheken eine Objekt Repräsentation benötigt. 
+Eine Deserialisierung der Daten in Objekte ist für komplexe Business-Logik von Vorteil. Statische Datenmodelle sollten immer dann verwendet werden, wenn die Manipulation der Daten kompliziert wird oder wenn die Verwendung externer Bibliotheken eine Objektrepräsentation benötigt. 
 
-Nach Voitot ist die Frage also nicht, statische Daten Modelle zu vergessen, sondern sie nur dann zu benutzen, wenn sie notwendig sind. Einfache und dynamische Strukturen sollten so oft es geht erhalten bleiben \cite{jctc}.
+Nach Voitet ist die Frage also nicht, statische Datenmodelle zu vergessen, sondern sie nur dann zu benutzen, wenn sie notwendig sind. Einfache und dynamische Strukturen sollten so oft es geht erhalten bleiben \cite{jctc}.
 
-\section{Abgrenzung zum Objektrelationalen Abbildung}
-Das Object-relational Mapping (ORM) bezeichnet man auch als All-Model-Approach. Hierbei erfolgt die Kommunikation mit der Datenbankschnittstelle über Objekte der Programmiersprache. Abfragen an die Datenbank resultieren in Objekten der Programmiersprache. Der Fokus der Objektrelationalen Abbildung liegt in der Überführung von Objekten der Objektorientierten Programmierung in ein relationales, tabellenorientiertes Schema \cite{wambler}. 
+\section{Abgrenzung zur objektrelationalen Abbildung}
+Das \tete{Object-relational Mapping} (ORM) bezeichnet man auch als \tete{All-Model-Approach}. Hierbei erfolgt die Kommunikation mit der Datenbankschnittstelle über Objekte der Programmiersprache. Abfragen an die Datenbank resultieren in Objekten der Programmiersprache. Der Fokus der objektrelationalen Abbildung liegt in der Überführung von Objekten der objektorientierten Programmierung in ein relationales, tabellenorientiertes Schema \cite{wambler}. 
 
 \begin{figure}[h]   
   \centering     
@@ -60,55 +60,55 @@ Das Object-relational Mapping (ORM) bezeichnet man auch als All-Model-Approach. 
   \label{fig:orm} 
 \end{figure}
 
-Der Hauptvorteil eines ORM liegt in der Abstraktion von der Datenbank. Für die Business Logik gibt es keinen Unterschied zwischen Objekten aus der Datenbank und Objekten der Programmiersprache. Die Datenbank kann meist ohne Änderungen an der Applikation ausgetauscht werden.
+Der wichtigste Vorteil eines Frameworks für die objektrelationale Abbildung liegt in der Abstraktion von der Datenbank. Für die Business-Logik gibt es keinen Unterschied zwischen Objekten aus der Datenbank und Objekten der Programmiersprache. Die Datenbank kann meist ohne Änderungen an der Applikation ausgetauscht werden.
 
 \FloatBarrier
 \subsection{Objektrelationale Unverträglichkeit}
 
-Ein ORM bringt einige konzeptionelle Probleme mit sich. Diese werden im allgemeinen in der Literatur als \tete{Object-relational Impedance Mismatch} (ORIM) bezeichnet. Die objektrelationale Unverträglichkeit resultiert aus den Unterschieden im zugrunde liegenden Konzept, sowie Differenzen in der Darstellung und den Erwartungen des Entwicklers \cite{bowers}.
+Ein ORM bringt konzeptionelle Probleme mit sich. Diese werden in der Literatur in der Regel als \tete{Object-relational Impedance Mismatch} (ORIM) bezeichnet. Die objektrelationale Unverträglichkeit resultiert aus den Unterschieden im zugrundeliegenden Konzept, sowie aus Differenzen in der Darstellung und den Erwartungen des Entwicklers \cite{bowers}.
 
 Folgende Herausforderungen ergeben sich für die praktische Arbeit mit einem ORM:
 
 \begin{itemize}
-  \item Die Abbildung der Relationen zwischen den Objekten ist komplex. Es müssen One-to-One, One-to-Many und Many-to-Many Abhängikeiten ins Relationale Schema übertragen werden.
-\item Ein weiterer wichtiger Punkt ist die Abbildung von Hierarchien und Vererbungen aus der Objekt Orientierten Programmierung in das physische Daten Modell. 
-\item Innerhalb des ORM muss es ein Objekt Caching geben. Dieses ist notwendig um die Illusion zu erzeugen, dass es sich um ein Objekt der Programmiersprache handelt. Denn wird ein Objekt mehrmals aus der Datenbank abgefragt, so muss ein referenz-gleiches Objekt zurückgegeben werden \cite{inappropriate-abstractions}.
-\item Der Entwickler muss die ORM Limitierungen die sich aus dem ORIM ergeben akzeptieren. Die Probleme müssen bekannt sein, um sie bereits bei der Daten Modellierung zu umgehen \cite{vietnam}. 
+  \item Die Abbildung der Relationen zwischen den Objekten ist komplex. Es müssen One-to-One, One-to-Many und Many-to-Many Abhängikeiten ins relationale Schema übertragen werden.
+\item Ein weiterer zentraler Punkt ist die Abbildung von Hierarchien und Vererbungen aus der objektorientierten Programmierung in das physische Datenmodell. 
+\item Innerhalb des ORM muss es ein Objekt-Caching geben. Dieses ist notwendig um die Illusion zu erzeugen, dass es sich um ein Objekt der Programmiersprache handelt. Denn wird ein Objekt mehrmals aus der Datenbank abgefragt, so muss ein referenzgleiches Objekt zurückgegeben werden \cite{inappropriate-abstractions}.
+\item Der Entwickler muss die ORM-Limitierungen, die sich aus dem ORIM ergeben, akzeptieren. Die Probleme müssen somit bekannt sein, um sie bereits bei der Datenmodellierung zu umgehen \cite{vietnam}. 
 \end{itemize}
 
-Ted Neward, Autor von „The Busy Java Developers Guide to Scala“, macht den frühen Erfolg von ORMs und die Erleichterungen, welche die ersten ORMs mit sich brachten, dafür verantwortlich, dass ORMs verwendet werden ohne deren Limitationen zu beachten. So kommt es zu Mehraufwand an Zeit und Energie für die Erhaltung und Anpassung an alle Nutzungsfälle \cite{vietnam}.
+Ted Neward, Autor von „The Busy Java Developers Guide to Scala“, macht den frühen Erfolg von objektrelationalen Abbildungen und die Erleichterungen, welche die ersten ORMs mit sich brachten, dafür verantwortlich, dass zum Teil ORMs verwendet werden, ohne deren Limitationen zu beachten. Das wiederum führt zu Mehraufwand an Zeit und Energie für die Erhaltung und Anpassung an alle Nutzungsfälle \cite{vietnam}.
 
-\subsection{Unterschiede zum Data Centric Design}
-Das Data Centric Design ist viel stärker an die Datenbank gebunden und deren Austausch ist deutlich schwieriger. Dies sorgt aber dafür, dass keine Illusion einer abstrahierten Datenbank entsteht. Da das Data Centric Design ein Ansatz mit funktionalem Hintergrund ist, sind die Datenstrukturen in der Regel unveränderbar. Ein Caching zur Sicherung der Objektidendität ist daher nicht notwendig. Die Objektgleichheit ist in diesem Fall über Wertgleichheit definiert (vgl. Scala Case Klassen \cite{scala-case-class}). Im Gegensatz zum ORM muss der Entwickler sich beim Data Centric Design selbst um die Darstellung und Umwandlung seiner Daten in das Datenbank Format kümmern. Durch die Verwendung einer objekt- oder dokumentenbasierten Datenbank ist diese Umwandlung einfacher und mit weniger Problemen behaftet als eine Konvertierung in ein relationales Schema.
+\subsection{Unterschiede zum data-centric Design}
+Das data-centric Design ist viel stärker an die Datenbank gebunden und deren Austausch ist deutlich schwieriger. Dies sorgt dafür, dass keine Illusion einer abstrahierten Datenbank entsteht. Da das data-centric Design ein Ansatz mit funktionalem Hintergrund ist, sind die Datenstrukturen in der Regel unveränderbar. Ein Caching zur Sicherung der Objektidendität ist daher nicht notwendig. Die Objektgleichheit ist in diesem Fall über Wertgleichheit definiert (vgl. Scala Case Klassen \cite{scala-case-class}). Im Gegensatz zum ORM muss der Entwickler beim data-centric Design selbst um die Darstellung und Umwandlung seiner Daten in das Datenbankformat kümmern. Durch die Verwendung einer objekt- oder dokumentenbasierten Datenbank ist diese Umwandlung einfacher und mit weniger Problemen behaftet, als eine Konvertierung in ein relationales Schema.
 
-\section{Abgrenzung zu Data Access Objekt}
-Implementierungen eines \tete{Data Access Object} (DAO, oft auch \tete{Data Access Procedure}) basiert auf dem \tete{Data Access Object} Pattern \cite{j2ee-pattern}.  Das Pattern hat das Ziel, den Datenzugriff und die Datenmanipulation in einen separaten Layer auszulagern. Es ergibt sich eine Kapselung der Datenbankzugriffe an einem Ort der Applikation. Bei der Umsetzung gibt es se Möglichkeit ein DAO zur Abstraktion der Datenbank als ganzes zu verwenden oder für jede einzelne Datenbankstruktur ein DAO anzulegen.
+\section{Abgrenzung zu Datenzugriffsobjekten}
+Implementierungen von Datenzugriffsobjekten, in der englischsprachigen Literatur \tete{Data Access Object} (DAO) oder \tete{Data Access Procedure}, basieren auf dem \tete{Data Access Object} Pattern \cite{j2ee-pattern}.  Das Pattern hat das Ziel, den Datenzugriff und die Datenmanipulation in einen separaten Layer auszulagern. Daraus ergibt sich eine Kapselung der Datenbankzugriffe an einem Ort der Applikation. Bei der Umsetzung gibt es die Möglichkeit, ein DAO zur Abstraktion der Datenbank als Ganzes zu verwenden oder für jede einzelne Datenbankstruktur ein DAO anzulegen.
 
-Der Hauptfokus liegt in der Abstrahierung der Datenbank. Bei Änderungen an der Datenquelle müssen in der Regel nur die Data Access Objects angepasst werden, der Anwendungscode bleibt in der Regel unberührt. Die Aufgabe der Serialisierung der Daten von den Strukturen der Anwendung in Strukturen der Datenbank sind nicht Aufgabe des DAO sondern des Data Transfer Object (DTO) \footnote{vgl. J2EE Patterns – Data Transfer Object \url{http://www.oracle.com/technetwork/java/transferobject-139757.html}}.
+Der Hauptfokus liegt in der Abstrahierung der Datenbank. Bei Änderungen an der Datenquelle müssen in der Regel nur die Datenzugriffsobjekte angepasst werden, denn der Anwendungscode bleibt in der Regel unberührt. Die Serialisierung der Daten von den Strukturen der Anwendung in Strukturen der Datenbank ist nicht Aufgabe des DAO, sondern des \tete{Data Transfer Object} (DTO) \footnote{vgl. J2EE Patterns – Data Transfer Object \url{http://www.oracle.com/technetwork/java/transferobject-139757.html}}.
 
-Im DAO findet über einen Datenbank Treiber direkter Zugriff auf die Datenbank statt. Man kann dieses Objekt somit als Mittelsmann zwischen Datenbank und Applikation sehen. Durch die direkte Kommunikation mit der Datenquelle können alle unterstützten Funktionen ausgenutzt werden. 
+Im DAO findet über einen Datenbanktreiber direkter Zugriff auf die Datenbank statt. Man kann das Datenzugriffsobjekt somit als Bindeglied zwischen Datenbank und Applikation sehen. Durch die direkte Kommunikation mit der Datenquelle können alle unterstützten Funktionen ausgenutzt werden. 
 
-Sowohl DAO als auch ORM haben als Ziel die Abstrahierung der Datenbank. Im Gegensatz zum DAO geht das ORM einen Schritt weiter und abstrahiert nicht nur über die Funktionen, welche durch die Datenbank zur Verfügung gestellt werden, sondern auch über die Innere Struktur der Datenquelle. In der Regel bauen ORM Implementierungen auf dem DAO und dem Data Transfer Object Pattern auf.
+Sowohl DAO als auch ORM haben die Abstrahierung der Datenbank als Ziel. Im Gegensatz zum DAO geht das ORM jedoch noch einen Schritt weiter und abstrahiert nicht nur über die Funktionen, welche durch die Datenbank zur Verfügung gestellt werden, sondern auch über die Innere Struktur der Datenquelle. In der Regel bauen ORM-Implementierungen auf dem Data Access Object Pattern und dem Data Transfer Object Pattern auf.
 
-\subsection{Unterschiede zum Data Centric Design}
-Das DAO Pattern enthält Ähnlich dem Data Centric Design keine Serialisierung oder Deserialisierung. Beide Designs können sehr gut zusammen verwendet werden. Der Datenfluss kann so durch ein DAO realisiert werden. Dadurch wird eine deutlich stärkere Kapselung erreicht. In Voitots Ausführungen benutzt er in seinen Beispielen kein DAO, die Datenbankabfragen sind somit über den kompletten Quellcode verteilt. Bei Beispiel Applikationen oder kleinen Anwendungen ist dies kein Problem, bei größeren Anwendungen mit vielen verschiedenen Daten Modellen geht die Übersicht schnell verloren. Die Verwendung eines {Data Access Object} führt zu einem \tete{Single point of responsibility}\footnote{ Single responsibility prinziple (SRP), vgl. \cite[p.~339]{design-patterns}}
+\subsection{Unterschiede zum data-centric Design}
+Das DAO-Pattern enthält, ähnlich dem data-centric Design, keine Serialisierung oder Deserialisierung. Beide Designs können sehr gut zusammen verwendet werden. Der Datenfluss kann so durch ein DAO realisiert werden. Dadurch wird eine deutlich stärkere Kapselung erreicht. Voitet benutzt in seinen Beispielen kein DAO, sodass sich die Datenbankabfragen über den kompletten Quellcode verteilen. Während das bei Beispielapplikationen oder kleinen Anwendungen kein Problem darstellt, geht bei größeren Anwendungen mit vielen verschiedenen Datenmodellen schnell die Übersichtlichkeit verloren. Die Verwendung eines Datenzugriffsobjektes führt zu einem \tete{Single point of responsibility}\footnote{ Single responsibility prinziple (SRP), vgl. \cite[p.~339]{design-patterns}}
  und stärkt somit die Struktur des gesamten Projektes. 
 
-\section{Grenzen des Data Centric Designs}
-Das Data Centric Design eignet sich sehr gut für Create-Read-Update-Delete (CRUD) Anwendungen. Dort liegt der Fokus auf der Datenmanipulation was zum Grundsatz des Designs passt.
+\section{Grenzen des data-centric Designs}
+Das data-centric Design eignet sich sehr gut für \tete{Create-Read-Update-Delete} (CRUD)-Anwendungen. Dort liegt der Fokus auf der Datenmanipulation, was zum Grundsatz des Designs passt.
 
-Es erfolgt eine explizite Bindung an das Datenmodell. Durch die Nähe zur Datenquelle können spezifische Fähigkeiten einer Datenquelle genutzt und Anfragen effektiver gestaltet werden. Das Datenmodell ist Dynamisch und bietet damit eine leichte Veränderbarkeit des Modells. Die Verknüpfung ist aufgrund dynamischer Strukturen einfach.
+Es erfolgt eine explizite Bindung an das Datenmodell. Durch die Nähe zur Datenquelle können spezifische Fähigkeiten einer Datenquelle genutzt und Anfragen effektiver gestaltet werden. Die dynamischen Strukturen des Datenmodells ermöglichen eine leichte Veränderbarkeit des Modells sowie einfache Verknüpfungen zwischen Daten.
 
-Grenzen sind dem Data Centric Design vor allem durch die Business Logik gesetzt. Durch die dynamischen Strukturen im Design ist der Code meist komplizierter und länger.
+Grenzen sind dem data-centric Design vor allem durch die Business-Logik gesetzt. Durch die dynamischen Strukturen im Design ist der Code meist komplizierter und länger.
 
-Ohne die Verwendung eines DAO gibt es in diesem Design keinen Singe point of responsibility für Datenbank Zugriffe. Dies erschwert wiederum Änderungen am Schema, da diese zu unvorhergesehenen Problemen an anderen stellen im Anwendungsquelltext führen können. Aus diesem Grund sollten bei diesem Design ein oder mehrere Data Access Objekte verwendet werden.
+Ohne die Verwendung eines DAO gibt es in diesem Design keinen Singe point of responsibility für Datenbankzugriffe. Das erschwert wiederum Änderungen am Schema, da diese zu unvorhergesehenen Problemen an anderen Stellen im Anwendungsquelltext führen können. Aus diesem Grund sollten bei diesem Design ein oder mehrere Datenzugriffsobjekte verwendet werden.
 
 \section{Umsetzung in Project-Zoom}
-Die REST Schnittstelle von Project-Zoom entspricht die einer klassischen CRUD Anwendung. Aufgrund der geringen Business Logik liegt es nahe, das Data Centric Design zu verwenden. Um die Wartung des Systems zu erleichtern, werden Data Access Objecte für jedes Daten Modell verwendet.
+Die REST-Schnittstelle von Project-Zoom entspricht die einer klassischen CRUD-Anwendung. Aufgrund der geringen Business-Logik liegt es nahe, das data-centric Design zu verwenden. Um die Wartung des Systems zu erleichtern, werden Datenzugriffsobjekte für jedes Datenmodell verwendet.
 
 \lstinputlisting[caption=Macro Verwendung zur Generierung einer JSON Konvertierung, label=lst:json-format, language=scala]{code/json_reads.scala}
 
-Für einige Teile der Anwendung ist es notwendig die JSON Strukturen der Datenbank in Scala Objekte umzuwandeln. Dies ist zum Beispiel der Fall für User Objekte die von der Authentifizierungsbibliothek SecureSocial verwendet werden. Play erlaubt die Generierung der Transformationsfunktionen mit Hilfe von Macros \footnote{JSON Macro incepetion \url{http://www.playframework.com/documentation/2.1.1/ScalaJsonInception}}. Das bedeutet, dass die Anwendung die Datenklassen des Modells definiert und die Funktionen zur Konvertierung von und nach JSON während der Kompilierung vom Framework übernommen werden. Ein Beispiel für solch eine Transformation ist in \ref{lst:json-format} mit der Variablen \tete{userFormat} gegeben. Diese ist in der Lage zwischen den beispielhaften Repräsentationen 
+Für einige Teile der Anwendung ist es notwendig die JSON-Strukturen der Datenbank in Scala-Objekte umzuwandeln. Dies ist zum Beispiel für User Objekte der Fall, welche von der Authentifizierungsbibliothek SecureSocial verwendet werden. Play erlaubt die Generierung der Transformationsfunktionen mit Hilfe von Macros\footnote{JSON Macro incepetion \url{http://www.playframework.com/documentation/2.1.1/ScalaJsonInception}}. Das bedeutet, dass die Anwendung die Datenklassen des Modells definiert und die Funktionen zur Konvertierung von und nach JSON während der Kompilierung vom Framework übernommen werden. Ein Beispiel für solch eine Transformation ist in \ref{lst:json-format} mit der Variablen \tete{userFormat} gegeben. Diese ist in der Lage, zwischen den beispielhaften Repräsentationen 
 \begin{lstlisting} 
 { 
   "firstName" : "Max", 
@@ -118,6 +118,6 @@ Für einige Teile der Anwendung ist es notwendig die JSON Strukturen der Datenba
 \begin{lstlisting} 
 User("Max", "Mustermann")
 \end{lstlisting} 
-zu konvertieren. Diese Bedarfskonvertierung ist durch die Verwendung von unveränderbaren Case Klassen typsicher und entspricht den Konzepten der funktionalen Programmierung \cite{functional-thinking}.
+zu konvertieren. Diese Bedarfskonvertierung ist durch die Verwendung von unveränderbaren Case-Klassen typsicher und entspricht den Konzepten der funktionalen Programmierung \cite{functional-thinking}.
 
-Die CRUD Operationen wurden \tete{list} und \tete{read} wurden implementiert, ohne Datenbankobjekte zu konvertieren. Die Daten werden aus der Datenbank gelesen, transformiert und anschließend an den Anfragenden Client zurückgegeben. Bei der Transformation werden z.B. Password Hashes und Login Informationen die sich im User Objekt befinden enternt. Die Funktionen \tete{create}, \tete{update} und \tete{delete} sind nicht für alle Datenbankobjekte implementiert. Dies liegt an der Anforderung, das die Datenhaltung in der von der D-School bereits verwendeten Datenbank geschehen soll. Project-Zoom soll diese Daten nur aggregieren.
+Die CRUD-Operationen \tete{list} und \tete{read} wurden implementiert, ohne Datenbankobjekte zu konvertieren. Die Daten werden aus der Datenbank gelesen, transformiert und anschließend an den anfragenden Clienten zurückgegeben. Bei der Transformation werden z.B. Passwort-Hashes und Login-Informationen, die sich im User-Objekt befinden, entfernt. Die Funktionen \tete{create}, \tete{update} und \tete{delete} sind nicht für alle Datenbankobjekte implementiert. Dies liegt an der Anforderung, dass die Datenhaltung in der von der D-School bereits verwendeten Datenbank geschehen soll. Project-Zoom soll diese Daten nur aggregieren.

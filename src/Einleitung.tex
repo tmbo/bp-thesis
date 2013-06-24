@@ -5,11 +5,11 @@ Die School of Design Thinking (D-School) lehrt die kreative Herangehensweise an 
 
 In der Regel besteht ein D-School Kurs aus mehreren Kleingruppen von ca. sechs Teilnehmern, die gemeinsam an einem Projekt arbeiten. Das Projektthema wird dabei entweder von der D-School selbst oder, vor allem bei längeren Projekten, von externen Projektpartnern vorgeschlagen. 
 
-Bei der Arbeit an den Projekten durchlaufen die Teilnehmenden verschiedene Phasen: Während dabei zunächst das Verstehen und Beobachten des Problemfeldes im Vordergrund stehen, wird anschließend ein Standpunkt definiert. Es folgt die Phase der Ideenfindung, an die die Erstellung eines Prototypen anknüpft. Dieser Prototyp wird zum Schluss mit geeigneten Versuchspersonen getestet. Im Verlauf dieser Phasen entstehen unterschiedlichste Dokumente, welche die Lösungsfindung dokumentieren.
+Bei der Arbeit an den Projekten durchlaufen die Teilnehmenden verschiedene Phasen: Während dabei zunächst das Verstehen und Beobachten des Problemfeldes im Vordergrund stehen, wird anschließend ein Standpunkt definiert. Es folgt die Phase der Ideenfindung, an die die Erstellung eines Prototypen anknüpft. Dieser Prototyp wird zum Schluss mit geeigneten Versuchspersonen getestet. Im Verlauf dieser Phasen entstehen unterschiedlichste Dokumente, welche die Lösungsfindung dokumentieren. (vgl. \cite{design-thinking})
 
 Im Verlauf des Projektes kommt es durchaus vor, dass ein Team eine Phase mehrmals durchläuft oder in eine vorherige Phase zurückkehrt. Dies erschwert die Organisation der Dokumente, z.B. in einer einfachen hierarchischen Struktur. Weiterhin ist es schwierig allein aus den Dokumenten deren Entstehungsreihenfolge und Bedeutung zu erfassen. Meist entstehen während eines drei Monate andauernden Projektes verschiedenste Präsentationen, Zusammenfassungen, Prototypen, Bilder von Whiteboards und Interviewdokumentationen. Diese werden in der Regel in der von den Studierenden bevorzugten Art und Weise gespeichert und verwaltet, beispielsweise mit Hilfe von Dropbox\footnote{\url{http://www.dropbox.com}}, Google Docs\footnote{\url{http://drive.google.com}} oder \gls{Box}\footnote{\url{http://box.com}}.
 
-Das Verständnis der Dokumentation ist sowohl für das Projekt selbst, zum Verstehen und Erlernen des Prozesses, als auch als Ideenquelle für zukünftige Projekte wichtig. Ferner sind die erstellten Artefakte nützlich um neue Projektpartner zum werben, welche die Projekte betreuen. 
+Das Verständnis der Dokumentation ist sowohl für das Projekt selbst, zum Verstehen und Erlernen des Prozesses, als auch als Ideenquelle für zukünftige Projekte wichtig. Ferner sind die erstellten Artefakte nützlich um neue Projektpartner zum Werben, welche die Projekte betreuen. 
 
 \section{Zielsetzung von Project-Zoom}
 Project-Zoom soll der Verbesserung der Dokumentation dienen. Dazu sollen die von den Studierenden erzeugten Artefakte durch manuelles Anordnen in eine Form gebracht werden, welche den Prozess der Gruppe visualisiert. Die Mitarbeiter der D-School können diese entstandenen Graphen anschließend nutzen um die Projektverläufe zu analysieren und gegebenenfalls den D-School Prozess anpassen.
@@ -29,9 +29,15 @@ Die Bachelorarbeit von Dominic Bräunlein \cite{bp-dome} erläutert das Generier
 
 Thomas Werkmeister befasst sich in seiner Arbeit \cite{bp-tewe} mit der Anbindung externer Systeme zur Integration von Daten. Diese aggregierte Datenbasis ist die Grundlage für die Wissensbasis und die einzelnen Projekte.
 
-Die Komponenten, die in den Arbeiten \cite{bp-tewe} und \cite{bp-dome} beschrieben sind, sind mit dem hier erläuterten Systemteil mittels eines Eventsystems verbunden. Das Client-Frontend ist über eine REST-Anbindung\footnote{vgl. Konzept des Representational state transfer in \cite{rest}} an das Server-Backend angeschlossen. Mit der clientseitigen Implementierung der REST-Schnittstelle beschäftigt sich \cite{bp-norman}.
+\begin{figure}[h]  
+  \centering     
+  \includegraphics[width=1.0\textwidth]{img/architecture_overview.pdf}  
+   \caption{Überblick über die verschiedenen Packete und ihre Schnittstellen; In gestricheltem Rahmen der für diese Arbeit relevante Teil der Architektur}
+  \label{fig:architecture-overview} 
+\end{figure}
 
-\section{Gliederung}
+Die Abbildung \ref{fig:architecture-overview} zeigt einen groben Überblick über die Architektur des Systems. Der für diese Arbeit relevante Teil ist dabei gestrichelt eingerahmt. Die Komponenten, die in den Arbeiten \cite{bp-tewe} (Konnektoren) und \cite{bp-dome} (Thumbnailgenerator) beschrieben sind, sind mit dem hier erläuterten Systemteil mittels eines Eventsystems verbunden. Das Client-Frontend ist über eine REST-Anbindung\footnote{vgl. Konzept des Representational state transfer in \cite{rest}} an das Server-Backend angeschlossen. Mit der clientseitigen Implementierung der REST-Schnittstelle beschäftigt sich \cite{bp-norman}.
+
 In dieser Arbeit wird zunächst ein Überblick über das Gesamtsystem gegeben. Dazu werden die Anforderungen der D-School an das Backend analysiert, welche als Grundlage für die Wahl der verwendeten Technologien dienen. Anschließend wird die Architektur des Backends näher erläutert. Hier liegt der Hauptfokus zunächst auf einer neuen Art und Weise, eine Datenbank an eine Webapplikation anzubinden. Im Anschluss werden einige Feinheiten und ausgewählte Stellen der Datenmodellierung von Project-Zoom beleuchtet. Den Abschluss bildet die architekturelle Grundlage zur Anbindung externer Systeme für die Erweiterung von Project-Zoom.
 
 %\zitat{"`Ein Zitat kann manchmal helfen ;-)"' (\cite{TODO})} 
