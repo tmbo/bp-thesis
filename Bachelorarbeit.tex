@@ -40,7 +40,6 @@ numbers=noenddot
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{color}
-\usepackage{xcolor}
 \usepackage[autooneside,automark]{scrpage2}
 \usepackage[stable, hang, flushmargin]{footmisc}
 \usepackage[pdftex, pdfdisplaydoctitle=true, colorlinks, linktocpage, linkcolor=black, citecolor=black, urlcolor=black, hyperfootnotes=false]{hyperref}
@@ -49,6 +48,7 @@ numbers=noenddot
 \usepackage{longtable,ltcaption}
 \usepackage{wrapfig}
 \usepackage{textcomp}
+\usepackage{xcolor}
 \usepackage{listings}
 \usepackage{enumitem}
 \usepackage{subfigure}
@@ -63,7 +63,9 @@ numbers=noenddot
 \usepackage[xindy,toc]{glossaries}
 \usepackage[section]{placeins}
 \usepackage{scala}
+\usepackage{capt-of}
 \usepackage{setspace}
+\usepackage{nameref}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% DOCUMENT DEFINITIONS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -98,7 +100,13 @@ numbers=noenddot
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% END OF PAGESTYLE SELECTION
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\lstset{
+  basicstyle=\ttfamily \color{black},
+  commentstyle=\itshape\color{darkgreen},
+  keywordstyle=\bfseries\color{blue},
+  stringstyle=\color{darkred},
+	columns=fixed
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% colored head- and footlines
 \setheadsepline{1.0pt}[\color{hpired}] \setfootsepline{1.0pt}[\color{hpired}]
@@ -146,7 +154,6 @@ numbers=noenddot
 	\cleardoublepage
 	%$\include{src/Danksagung}
 	\include{src/Zusammenfassung_d}
-	\include{src/Zusammenfassung_e}
 	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%% TABLE OF CONTENT
@@ -200,7 +207,6 @@ numbers=noenddot
     \renewcommand{\thepage}{\thechapter-\arabic{page}}
     %\include{src/Anhang}
     \include{src/Anhang/App}
-    \include{src/Anhang/Eval}
 	\end{appendix}
 	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

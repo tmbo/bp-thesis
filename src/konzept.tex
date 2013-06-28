@@ -8,7 +8,7 @@ In diesem Kapitel wird die Architektur von Project-Zoom betrachtet. Begonnen wir
 \subsection{Webanwendung vs. native Applikation}
 Eine der grundlegenden Entscheidungen in der Entwicklung ist die Art der Anwendung, für dieses Projekt kommen eine Webanwendung oder eine native Anwendung in Frage. 
 
-Auf Grund der Anforderung der D-School, dass die Anwendung auch außerhalb der Gebäude der D-School verwendbar sein muss (vgl. REQXXX), liegt eine Webanwendung nahe. Hinzu kommt, dass die Projekt-Mitglieder bereits mit dem Umgang von Webseiten und deren Navigation vertraut sind. Für die Erweiterbarkeit stellt dies ebenfalls einen enormen Vorteil dar, da ein zentrales System gewartet werden kann und neue Funktionen einfach eingespielt werden können. Zudem dreht sich das Projekt um das Thema Dokumentation, bei der oft dazu geneigt wird, sie aufzuschieben. Eine Webseite senkt hier die Hemmschwelle und umgeht die Notwendigkeit einer Verteilung und Installation des Programms.
+Auf Grund der Anforderung der D-School, dass die Anwendung auch außerhalb der Gebäude der D-School verwendbar sein muss (vgl. Anforderung \ref{itm:f6}), liegt eine Webanwendung nahe. Hinzu kommt, dass die Projekt-Mitglieder bereits mit dem Umgang von Webseiten und deren Navigation vertraut sind. Für die Erweiterbarkeit stellt dies ebenfalls einen enormen Vorteil dar, da ein zentrales System gewartet werden kann und neue Funktionen einfach eingespielt werden können. Zudem dreht sich das Projekt um das Thema Dokumentation, bei welcher oft dazu geneigt wird, sie aufzuschieben. Eine Webseite senkt hier die Hemmschwelle und umgeht die Notwendigkeit einer Verteilung und Installation des Programms.
 
 Eine Trennung der Applikation in Frontend und Backend erlaubt eine klare Funktionstrennung. Für Webapplikationen befindet sich das Backend auf Serverseite und das Frontend im Browser auf Clientseite. Die klassischen Aufgaben der beiden Teile sind:
 
@@ -33,18 +33,18 @@ Eine Trennung der Applikation in Frontend und Backend erlaubt eine klare Funktio
 
 \subsection{Generelle Architektur von Webapplikation-Backends}
 
-Die Grundlegende Architektur beim Bau einer Webanwendung hängt bei der Wahl eines Webframeworks vom Stil dieses Frameworks ab. Die Verwendung eines Webframeworks erlaubt die Konzentration auf die Umsetzung der Webschnittstelle und beschleunigt die Programmierung von Webanwendungen durch das forcieren von Prinzipien wie "Don't repeat yourself" (DRY) (vgl. \cite[p.~23]{pragmatic-programmer}) oder "Convention over Configuration" (vgl. \cite[p.~3]{maven}). Der Architekturstil den die meisten Frameworks verwenden ist das \tete{Model-View-Controller} (MVC)-Pattern\footnote{Aufgrund der allgemein üblichen Bezeichnung Model, View und Controller für die Teile einer MVC-Architekur werden diese anstatt der entsprechenden Begriffe Modell, Präsentation und Steuerung in dieser Arbeit verwendet.} (vgl. \cite[p.~14]{gang-of-four}). 
+Die Grundlegende Architektur beim Bau einer Webanwendung hängt bei der Wahl eines Webframeworks vom Stil dieses Frameworks ab. Die Verwendung eines Webframeworks erlaubt die Konzentration auf die Umsetzung der Webschnittstelle und beschleunigt die Programmierung von Webanwendungen durch das forcieren von Prinzipien wie "Don't repeat yourself" (DRY) (vgl. \cite[p.~23]{pragmatic-programmer}) oder "Convention over Configuration" (vgl. \cite[p.~3]{maven}). Der Architekturstil, den die meisten Frameworks verwenden, ist das \tete{Model-View-Controller} (MVC)-Pattern\footnote{Aufgrund der allgemein üblichen Bezeichnung Model, View und Controller für die Teile einer MVC-Architekur werden diese anstatt der entsprechenden Begriffe Modell, Präsentation und Steuerung in dieser Arbeit verwendet.} (vgl. \cite[p.~14]{gang-of-four}). 
 
 Das MVC Pattern dient der Abstraktion der Datenhaltung und Bussines-Logik von der Präsentation. Im Kontext einer Webanwendung ist die Rollenverteilung wie folgt:
 \begin{labeling}{\textbf{Controller:}}
-\item[\textbf{Model:}] Interaktion mit der Datenbank und Ausführung der Anwendungs-Logik
-\item[\textbf{View:}] Generierung von verschiedenen Darstellungen für die Daten, in der Regel im HTML, JSON\footnote{JavaScript Object Notation, \url{http://tools.ietf.org/html/rfc4627}} oder XML\footnote{Extensible Markup Language, \url{http://www.w3.org/TR/REC-xml/}} Format.
-\item[\textbf{Controller:}] Annahme von HTTP Anfragen und  Verarbeitung dieser zu Anweisungen an das Model. Erzeugen einer Antwort mit Hilfe eines Views auf Basis des veränderten Models.
+\item[Model] Interaktion mit der Datenbank und Ausführung der Anwendungs-Logik
+\item[View] Generierung von verschiedenen Darstellungen für die Daten, in der Regel im HTML, JSON\footnote{JavaScript Object Notation, \url{http://tools.ietf.org/html/rfc4627}} oder XML\footnote{Extensible Markup Language, \url{http://www.w3.org/TR/REC-xml/}} Format.
+\item[Controller] Annahme von HTTP Anfragen und  Verarbeitung dieser zu Anweisungen an das Model. Erzeugen einer Antwort mit Hilfe eines Views auf Basis des veränderten Models.
 \end{labeling}
 
 \subsection{REST und CRUD}
 
-Bei der Umsetzung von HTTP Schnittstellen hat sich der \tete{Representational State Transfer} (REST)-Stil etabliert. Dieser legt ein URL Schema für die Standardinteraktionen auf Ressourcen fest und verwendet dazu die verschiedenen HTTP Operationen. Diese Aktionen umfassen \tete{Create}, \tete{Read}, \tete{Update} und \tete{Delete} die als CRUD bezeichnet werden.
+Bei der Umsetzung von HTTP Schnittstellen hat sich der \tete{Representational State Transfer} (REST)-Stil als gängige Alternative zu anderen Konzepten wie SOAP\footnote{Simple Object Access Protocol, \url{http://www.w3.org/TR/soap/} (Zugriff 28.06.13)} etabliert. Dieser legt ein URL Schema für die Standardinteraktionen auf Ressourcen fest und verwendet dazu die verschiedenen HTTP Operationen. Diese Aktionen umfassen \tete{Create}, \tete{Read}, \tete{Update} und \tete{Delete} die als CRUD bezeichnet werden.
 
 %--------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -66,7 +66,7 @@ In der Abbildung \ref{fig:models} ist ein Auszug aus dem Datenmodell für Projec
 \subsection{Datenmodell für Graphen}
 Ein Graph wurde als gerichteter Graph mit jeweils einer Liste für Knoten, Kanten und Cluster modelliert. Knoten und Kanten entsprechen denen aus der Graphentheorie bekannten Strukturen\footnote{Als konzeptionelle Referenz dient \cite[p.~531]{corman}}.  Cluster wurden eingeführt, um Nutzern die Möglichkeit zu geben, Knoten zu gruppieren und \tete{Tags} hinzuzufügen.
 
-In der Datenbank sind für den \tete{Payload} eines Knotens nur Referenzen abgelegt. Der Payload beschreibt dabei den eigentlichen Inhalt eines Knotens, z.B. ein Projekt oder ein Artefakt. Wenn der Graph über die REST-Schnittstelle ausgeliefert wird, dann wird diese Payload-Referenz mit dem eigentlichen Inhalt des Knotens ersetzt. Dies verringert den Speicherbedarf des Graphs und verhindert das mehrfache Speichern des Payloads in der Datenbank.
+In der Datenbank sind für den \tete{Payload} eines Knotens nur Referenzen abgelegt. Der Payload beschreibt dabei den eigentlichen Inhalt eines Knotens, z.B. ein Projekt oder ein Artefakt. Wenn der Graph über die REST-Schnittstelle ausgeliefert wird, dann wird diese Referenz auf den \tete{NodePayload} mit dem eigentlichen Inhalt des Knotens ersetzt. Dies verringert den Speicherbedarf des Graphs in der Datenbank und verhindert das mehrfache Speichern des Payloads.
 
 \subsubsection{Versionierung}
 
@@ -80,13 +80,13 @@ Alternativ bestünde die Möglichkeit, bei jeder Änderung den kompletten, geän
 
 \subsection{Datenmodell für Artefakte}
 
-\tete{Artefakte} werden durch externe Konnektoren gefunden und anschließend durch den Backend-Core in der Datenbank abgelegt, wo alle Informationen enthalten sind, die charakteristisch für das jeweilige Artefakt sind. Eine Besonderheit zeigt sich im Feld \tete{metadata}. Hier können alle Informationen eines Connetors gespeichert werden, die keinem allgemeinen Feld zugeordnet werden können. Durch diese Speicherung von Informationen, die zwar im Moment für die Anwendung irrelevant sind und die nicht von allen Connectoren geliefert werden können, vermeidet man einen Informationsverlust. Bei der Weiterentwicklung der Anwendung können dann Informationen aus diesen Metadaten extrahiert und als eigenständige Felder verwendet werden. 
+\tete{Artefakte} werden durch externe Konnektoren gefunden und anschließend durch den Backend-Core in der Datenbank abgelegt, wo alle Informationen enthalten sind, die charakteristisch für das jeweilige Artefakt sind. Eine Besonderheit zeigt sich im Feld \tete{metadata}. Hier können alle Informationen eines Konnektors gespeichert werden, die keinem allgemeinen Feld zugeordnet werden können. Durch diese Speicherung von Informationen, die zwar im Moment für die Anwendung irrelevant sind und die nicht von allen Konnektoren geliefert werden können, vermeidet man einen Informationsverlust. Bei der Weiterentwicklung der Anwendung können dann Informationen aus diesen Metadaten extrahiert und als eigenständige Felder verwendet werden. 
 
-Zu einem Artefakt sind verschiedene \tete{Ressourcen} abgelegt. Eine Ressource bezieht sich hierbei auf die digitale Repräsentation eines Artefakts. Das heißt, dass es zu jedem Ressourcenobjekt in der Datenbank eine zugehörige Datei im Dateisystem gibt. Beispielsweise ist die Originale Datei eine Ressource, generierte Thumbnails sind weitere. Das Feld \tete{typ} beschreibt die Art der Ressource und erlaubt einem Client die differenzierte Behandlung unterschiedlicher Typen.  
+Zu einem Artefakt sind verschiedene \tete{Ressourcen} abgelegt. Eine Ressource bezieht sich hierbei auf die digitale Repräsentation eines Artefakts. Das heißt, dass es zu jedem Ressourcenobjekt in der Datenbank eine zugehörige Datei im Dateisystem gibt. Beispielsweise ist die originale Datei eine Ressource, generierte Thumbnails sind weitere. Das Feld \tete{typ} beschreibt die Art der Ressource und erlaubt einem Client die differenzierte Behandlung unterschiedlicher Typen.  
 
 \subsection{Datenmodell für Nutzer}
 
-Neben Artefakten können durch einen externen Connector auch Profile gesammelt werden. Diese Profile bestimmen die Zugriffsrechte eines Nutzers. Der mit einem Profil verknüpfte User enthält die Anmeldeinformationen, welche für die Authentifizierung benötigt werden. Ein User wird erst dann an ein Profil angehangen, wenn sich ein Nutzer mit der im Profil angegebenen E-Mail-Adresse für Project-Zoom registriert. Aus diesem Grund ist es auch nur Nutzern erlaubt sich zu registrieren, für die bereits ein Profil existiert.
+Neben Artefakten können durch einen externen Konnektor auch Profile gesammelt werden. Diese Profile bestimmen die Zugriffsrechte eines Nutzers. Der mit einem Profil verknüpfte User enthält die Anmeldeinformationen, welche für die Authentifizierung benötigt werden. Ein User wird erst dann zu einem Profil assoziiert, wenn sich ein Nutzer mit der im Profil angegebenen E-Mail-Adresse für Project-Zoom registriert. Aus diesem Grund ist es auch nur Nutzern erlaubt sich zu registrieren, für die bereits ein Profil existiert.
 
 Die Abspaltung des Users als Container für die Authentifizierungsinformationen vom Profil hat weiterhin den Vorteil, dass diese Informationen nicht über einen Konnektor geändert werden können. Wäre das der Fall, so könnte ein Angreifer die Log-In-Informationen für Project-Zoom durch das Verändern von Daten in einem Konnektor so anpassen, dass er Zugriff auf den Nutzer Account bekommt.
 
@@ -104,23 +104,26 @@ Ein Backend für eine Webapplikation ist zunehmend eine Verbindung zwischen vers
 
 \subsubsection{NoSQL}
 Die Entwicklung der Datenbankmanagementsysteme bestand viele Jahre lang in der Optimierung und Verbesserung bestehender relationaler Datenbankmodelle. Im Jahr 1998 kam der Term Not-only SQL (NoSQL) auf (vgl. \cite{storage-solutions}). Heute gibt es verschiedene etablierte Datenbanken, die keine reinen SQL Datenbanken mehr sind, wie beispielsweise MongoDB, Apache CouchDB und Apache Cassandra\footnote{\url{http://cassandra.apache.org}}.
-\todo{Vorteil gegenüber SQL in bzug zu DCD}
+
+NoSQL Datenbanken sind vorteilhaft für ein Data-centric Design, da zur Umsetzung eines Datenflusses (vgl. Abbildung \ref{fig:dataflow}) eine Ähnlichkeit des Datenbank- und des Clientformats vorliegen muss. Diese Ähnlichkeit liegt zum Beispiel bei BSON und JSON vor und verhindert somit die Notwendigkeit einer Konvertierung.
 
 \subsubsection{Datenbanktreiber}
 \label{sec:reactive}
 Für die Anbindung von relationalen Datenbanken gibt es in Java die Java Database Connectivity (JDBC). Diese Schnittstelle abstrahiert über Datenbanken und deren Treiber, indem eine einheitliche API angeboten wird. Ausgerichtet ist JDBC auf relationale Datenbanken \cite{reese2000database}.
 
-Um NoSQL-Datenbanken anzubinden, benötigt man, wie bei JDBC, einen eigenen Treiber. Der Unterschied ist, dass es hier keine Abstraktionsebene über verschiedene NoSQL-Datenbanken gibt. Dies liegt vorrangig an der sich stark unterscheidenden Struktur der einzelnen Speichersysteme. Die unterschiedlichen NoSQL-Datenbanken sind jeweils speziell auf eine bestimmte Aufgabe ausgerichtet, wie z.B. auf Durchsatz, verteilte Umgebungen oder flexible Datenschemas. 
+Um NoSQL-Datenbanken anzubinden, benötigt man, wie bei JDBC, einen eigenen Treiber. Der Unterschied ist, dass es hier keine Abstraktionsebene über verschiedene NoSQL-Datenbanken gibt. Dies liegt vorrangig an der sich stark unterscheidenden Struktur der einzelnen Speichersysteme\footnote{Die gängigsten Formate sind dokumentenbasierte Speicher oder einfache Schlüssel-Wert Speicher (vgl. \cite{nosql-databases}), es gibt jedoch noch eine Reihe weiterer Speichersysteme.}. Die unterschiedlichen NoSQL-Datenbanken sind jeweils speziell auf eine bestimmte Aufgabe ausgerichtet, wie z.B. auf Durchsatz, verteilte Umgebungen oder flexible Datenschemas. 
 
-\tete{ReactiveMongo} ist ein asynchroner Datenbanktreiber für MongoDB und die Programmiersprache Scala. Die Vorteile eines asynchronen Treibers liegen auf der Hand: Für jede synchrone Datenbankabfrage wird normalerweise ein Thread verwendet, der bis zur Antwort blockiert ist. Bei mehreren Datenbankabfragen pro Request werden bei Last viele Threads benötigt, um Datenbankabfragen auszuführen. Asynchrone Treiber umgehen dieses Problem, indem sie Threads, welche Datenbankabfragen ausführen, nicht blockieren. Für dieses Konzept ist es notwendig, Platzhalter einzuführen. Diese ersetzen das Ergebnis, solange es noch nicht vorhanden ist.
+\tete{ReactiveMongo} ist ein Beispiel für einen asynchronen Datenbanktreiber für MongoDB. Die Vorteile eines asynchronen Treibers liegen auf der Hand: Für jede synchrone Datenbankabfrage wird normalerweise ein Thread verwendet, der bis zur Antwort blockiert ist. Bei mehreren Datenbankabfragen pro Request werden bei Last viele Threads benötigt, um Datenbankabfragen auszuführen. Asynchrone Treiber umgehen dieses Problem, indem sie Threads, welche Datenbankabfragen ausführen, nicht blockieren. Für dieses Konzept ist es notwendig, Platzhalter einzuführen. Diese ersetzen das Ergebnis, solange es noch nicht vorhanden ist.
 
 \begin{lstlisting}[label=lst:asyncaccess, caption=Funktionssignatur für asynchronen Datenbankzugriff]
-def findOneById(bid: BSONObjectID): Future[Option[Graph]]
+def findById(bid: BSONObjectID): Future[Graph] = {
+  collection.find("_id" -> bid)
+}
 \end{lstlisting}
-\todo{Vorteil Asynchronität, Referenz Anforderungen}
  
-Im Quelltext \ref{lst:asyncaccess} zeigt die Funktionssignatur den Rückgabetyp \tete{Future[Option[Graph]]}. \tete{Future} ist hierbei ebendieser Platzhalter für ein Ergebnis, welches noch nicht existiert. Um auf das Ergebnis eines \tete{Futures} zu reagieren, können verschiedene \tete{Callbacks} festgelegt werden.
+Im Quelltext \ref{lst:asyncaccess} zeigt die Funktionssignatur den Rückgabetyp \tete{Future[Graph]}. \tete{Future} ist hierbei ebendieser Platzhalter für ein Ergebnis, welches noch nicht existiert. Futures basieren dabei auf einem Konzept, welches in \cite{future-concept} beschrieben ist. Um auf das Ergebnis eines \tete{Futures} zu reagieren, können verschiedene \tete{Callbacks} festgelegt werden.
 
+Die Verwendung eines asynchronen Treibers ist vor allem im Hinblick auf das zu implementierende, asynchrone Eventsystem sinnvoll und von Vorteil. 
 
 \subsubsection{Manipulation von JSON}
 Das data-centric Design basiert auf der Idee der direkten Manipulation von Daten. Für eine Umsetzung des data-centric Designs mit Hilfe von JSON benötigt man somit eine Bibliothek, welche die Möglichkeit bietet, JSON zu transformieren und zu validieren.
@@ -132,7 +135,7 @@ Das Ziel im data-centric Design ist die direkte Manipulation von Daten. Der Foku
 
 \begin{figure}[h]   
   \centering     
-  \includegraphics[width=0.8\textwidth]{img/dataflow.png}  
+  \includegraphics[width=0.8\textwidth]{img/dataflow_dcd.pdf}  
    \caption{Datenfluss zwischen Datenbank, Backend und Client}   
   \label{fig:dataflow} 
 \end{figure}
@@ -141,7 +144,7 @@ In diesem Datenfluss soll es keine implizite Umwandlung der Daten in Objekte der
 
 Im Gegensatz zu anderen Modellen ist die Abstraktion von der Datenquelle kein Ziel des data-centric Designs. Das Festlegen auf eine Datenquelle bei der Entwicklung eines Systems erlaubt die Verwendung aller Funktionen, die diese Datenquelle zur Verfügung stellt. Beispielsweise erlaubt MongoDB die Verwendung sogenannter \tete{Capped Collections}\footnote{Mehr Informationen zu Capped Collections z.B. auf \url{http://docs.mongodb.org/manual/core/capped-collections/}}, welche auf hohen Durchsatz optimiert sind. Diese verhalten sich wie eine zirkuläre Queue mit begrenzter Größe. Viele Datenbanken besitzen spezielle, stark angepasste Funktionen, auf die jedoch bei der Verwendung von allgemeinen Datenbank APIs (z.B. JDBC) meist nicht zugegriffen werden kann. Ein Nachteil dieser engen Kopplung ist, dass der Austausch der Datenquelle dadurch schwieriger ist. 
 
-Eine Deserialisierung der Daten in Objekte ist für komplexe Business-Logik von Vorteil. Statische Datenmodelle sollten immer dann verwendet werden, wenn die Manipulation der Daten kompliziert wird oder wenn die Verwendung externer Bibliotheken eine Objektrepräsentation benötigt.  \todo{näher erläutern}
+Eine Deserialisierung der Daten in Objekte ist für komplexe Business-Logik von Vorteil. Statische Datenmodelle sollten immer dann verwendet werden, wenn die Manipulation der Daten kompliziert wird. Hier kommt der Nachteil von dynamischen Speicherstrukturen zum Vorschein, denn sobald es nicht mehr darum geht ein JSON Objekt zu Transformieren oder zu Validieren sondern auf einzelne Attribute zuzugreifen, muss diese Attribut immer einzeln deserialisiert werden. Das schließt die Berücksichtigung der Fehlerfälle, wie dem Fehlen des Attributes oder dem Vorhandensein des falschen Typs, mit ein. Aus diesem Grund ist hier eine Umwandlung in ein Objekt der Programmiersprache vor der Verwendung sinnvoll. Ebenfalls notwendig ist diese Konvertierung bei der Verwendung der meisten externen Bibliotheken.
 
 Nach Voitet ist die Frage also nicht, statische Datenmodelle zu vergessen, sondern sie nur dann zu benutzen, wenn sie notwendig sind. Einfache und dynamische Strukturen sollten so oft es geht erhalten bleiben (vgl. \cite{jctc}).
 
@@ -150,32 +153,31 @@ Das \tete{Object-relational Mapping} (ORM) bezeichnet man auch als \tete{All-Mod
 
 \begin{figure}[h]   
   \centering     
-  \includegraphics[width=0.8\textwidth]{img/orm.png}  
+  \includegraphics[width=1.0\textwidth]{img/dataflow_orm.pdf}  
    \caption{Datenfluss einer Applikation bei Verwendung eines ORM Frameworks}   
   \label{fig:orm} 
 \end{figure}
 
 Der wichtigste Vorteil eines Frameworks für die objektrelationale Abbildung liegt in der Abstraktion von der Datenbank. Für die Business-Logik gibt es keinen Unterschied zwischen Objekten aus der Datenbank und Objekten der Programmiersprache. Die Datenbank kann meist ohne Änderungen an der Applikation ausgetauscht werden.
-\todo{Abgrenzung zu NoSQL klarer}
 
 \FloatBarrier
-\subsection{Objektrelationale Unverträglichkeit}
-
+\subsubsection{Objektrelationale Unverträglichkeit}
+\label{sec:unvertraeglich}
 Ein ORM bringt konzeptionelle Probleme mit sich. Diese werden in der Literatur (vgl. \cite{ireland2009classification}) in der Regel als \tete{Object-relational Impedance Mismatch} (ORIM) bezeichnet. Die objektrelationale Unverträglichkeit resultiert aus den Unterschieden im zugrundeliegenden Konzept, sowie aus Differenzen in der Darstellung und den Erwartungen des Entwicklers (vgl. \cite{bowers}).
 
 Folgende Herausforderungen ergeben sich für die praktische Arbeit mit einem ORM:
 
 \begin{itemize}
-  \item Die Abbildung der Relationen zwischen den Objekten ist komplex. Es müssen One-to-One, One-to-Many und Many-to-Many Abhängikeiten ins relationale Schema übertragen werden.
-\item Ein weiterer zentraler Punkt ist die Abbildung von Hierarchien und Vererbungen aus der objektorientierten Programmierung in das physische Datenmodell. 
+  \item Die Abbildung der Assoziationen zwischen den Objekten ist komplex. Es müssen One-to-One, One-to-Many und Many-to-Many Abhängikeiten ins relationale Schema übertragen werden.
+\item Ein weiterer zentraler Punkt ist die Abbildung von Hierarchien und Vererbungen aus der objektorientierten Programmierung in das relationale Datenmodell. 
 \item Innerhalb des ORM muss es ein Objekt-Caching geben. Dieses ist notwendig um die Illusion zu erzeugen, dass es sich um ein Objekt der Programmiersprache handelt. Denn wird ein Objekt mehrmals aus der Datenbank abgefragt, so muss ein referenzgleiches Objekt zurückgegeben werden (vgl. \cite{inappropriate-abstractions}).
 \item Der Entwickler muss die ORM-Limitierungen, die sich aus dem ORIM ergeben, akzeptieren. Die Probleme müssen somit bekannt sein, um sie bereits bei der Datenmodellierung zu umgehen (vgl. \cite{vietnam}). 
 \end{itemize}
 
-Ted Neward, Autor von „The Busy Java Developers Guide to Scala“ \cite{busy-to-scala}, macht den frühen Erfolg von objektrelationalen Abbildungen und die Erleichterungen, welche die ersten ORMs mit sich brachten, dafür verantwortlich, dass zum Teil ORMs verwendet werden, ohne deren Limitationen zu beachten. Das wiederum führt zu Mehraufwand an Zeit und Energie für die Erhaltung und Anpassung an alle Nutzungsfälle (vgl. \cite{vietnam}).
+Ted Neward, Autor von „The Busy Java Developers Guide to Scala“ \cite{busy-to-scala}, macht den frühen Erfolg von objektrelationalen Abbildungen und die Erleichterungen, welche die ersten ORMs mit sich brachten, dafür verantwortlich, dass zum Teil ORMs verwendet werden, ohne deren Limitierungen zu beachten. Das wiederum führt zu Mehraufwand an Zeit und Energie für die Erhaltung und Anpassung an alle Nutzungsfälle (vgl. \cite{vietnam}).
 
 \subsubsection{Unterschiede zum data-centric Design}
-Das data-centric Design ist viel stärker an die Datenbank gebunden und deren Austausch ist deutlich schwieriger. Dies sorgt dafür, dass keine Illusion einer abstrahierten Datenbank entsteht. Da das data-centric Design ein Ansatz mit funktionalem Hintergrund ist, sind die Datenstrukturen in der Regel unveränderbar.\todo{Unterschied zwischen Struktureller und Objektverränderbarkeit} Ein Caching zur Sicherung der Objektidendität ist daher nicht notwendig. Die Objektgleichheit ist in diesem Fall über Wertgleichheit definiert (vgl. Scala Case Klassen in \cite{scala-case-class}). Im Gegensatz zum ORM muss der Entwickler beim data-centric Design selbst um die Darstellung und Umwandlung seiner Daten in das Datenbankformat kümmern. Durch die Verwendung einer objekt- oder dokumentenbasierten Datenbank ist diese Umwandlung einfacher und mit weniger Problemen behaftet, als eine Konvertierung in ein relationales Schema.
+Das data-centric Design ist viel stärker an die Datenbank gebunden und deren Austausch ist deutlich schwieriger. Dies sorgt dafür, dass keine Illusion einer abstrahierten Datenbank entsteht. Da das data-centric Design ein Ansatz mit funktionalem Hintergrund ist, sind die Datenstrukturen zur Laufzeit in der Regel unveränderbar\footnote{Die hier beschriebene Unveränderbarkeit bezieht sich auf die in der funktionalen Programmierung übliche Bedeutung. Die Struktur eines Objektes ist zur Entwurfszeit beliebig veränderbar. Zur Laufzeit können den Attributen eines Objektes nach Erstellung dessen keine neuen Werte mehr zugewiesen werden, der Zustand des Objektes ist somit unveränderbar (vgl. \cite[p.~181]{programmieren-in-scala})}. Ein Caching zur Sicherung der Objektidendität ist daher nicht notwendig. Die Objektgleichheit ist in diesem Fall über Wertgleichheit definiert (vgl. Scala Case Klassen in \cite{scala-case-class}). Im Gegensatz zum ORM muss der Entwickler beim data-centric Design selbst um die Darstellung und Umwandlung seiner Daten in das Datenbankformat kümmern. Durch die Verwendung einer objekt- oder dokumentenbasierten Datenbank ist diese Umwandlung einfacher und mit weniger Problemen behaftet, als eine Konvertierung in ein relationales Schema.
 
 \subsection{Abgrenzung zu Datenzugriffsobjekten}
 Implementierungen von Datenzugriffsobjekten, in der englischsprachigen Literatur \tete{Data Access Object} (DAO) oder \tete{Data Access Procedure}, basieren auf dem \tete{Data Access Object} Pattern (vgl. \cite{j2ee-pattern}).  Das Pattern hat das Ziel, den Datenzugriff und die Datenmanipulation in einen separaten Layer auszulagern. Daraus ergibt sich eine Kapselung der Datenbankzugriffe an einem Ort der Applikation. Bei der Umsetzung gibt es die Möglichkeit, ein DAO zur Abstraktion der Datenbank als Ganzes zu verwenden oder für jede einzelne Datenbankstruktur ein DAO anzulegen.
@@ -184,10 +186,10 @@ Der Hauptfokus liegt in der Abstrahierung der Datenbank. Bei Änderungen an der 
 
 Im DAO findet über einen Datenbanktreiber direkter Zugriff auf die Datenbank statt. Man kann das Datenzugriffsobjekt somit als Bindeglied zwischen Datenbank und Applikation sehen. Durch die direkte Kommunikation mit der Datenquelle können alle unterstützten Funktionen ausgenutzt werden. 
 
-Sowohl DAO als auch ORM haben die Abstrahierung der Datenbank als Ziel. Im Gegensatz zum DAO geht das ORM jedoch noch einen Schritt weiter und abstrahiert nicht nur über die Funktionen, welche durch die Datenbank zur Verfügung gestellt werden, sondern auch über die Innere Struktur der Datenquelle. In der Regel bauen ORM-Implementierungen auf dem Data Access Object Pattern und dem Data Transfer Object Pattern auf.
+Sowohl DAO als auch ORM haben die Abstrahierung der Datenbank als Ziel. Im Gegensatz zum DAO geht das ORM jedoch noch einen Schritt weiter und abstrahiert nicht nur über die Funktionen, welche durch die Datenbank zur Verfügung gestellt werden, sondern auch über die innere Struktur der Datenquelle. In der Regel bauen ORM-Implementierungen auf dem Data Access Object Pattern und dem Data Transfer Object Pattern auf.
 
 \subsubsection{Unterschiede zum data-centric Design}
-Das DAO-Pattern enthält, ähnlich dem data-centric Design, keine Serialisierung oder Deserialisierung. Beide Designs können sehr gut zusammen verwendet werden. Der Datenfluss kann so durch ein DAO realisiert werden. Dadurch wird eine deutlich stärkere Kapselung erreicht. Voitet benutzt in seinen Beispielen kein DAO, sodass sich die Datenbankabfragen über den kompletten Quellcode verteilen. Während das bei Beispielapplikationen oder kleinen Anwendungen kein Problem darstellt, geht bei größeren Anwendungen mit vielen verschiedenen Datenmodellen schnell die Übersichtlichkeit verloren. Die Verwendung eines Datenzugriffsobjektes führt zu einem \tete{Single Point of Responsibility}\footnote{ Single Responsibility Principle (SRP), vgl. \cite[p.~339]{design-patterns}}
+Das DAO-Pattern enthält, ähnlich dem data-centric Design, keine Serialisierung oder Deserialisierung von Objekten. Beide Designs können sehr gut zusammen verwendet werden. Der Datenfluss kann somit durch ein DAO realisiert werden, wodurch die Vorteile des Datenzugriffsobjektes, wie zum Beispiel eine stärkere Kapselung, genutzt werden. Voitet benutzt in seinen Beispielen kein DAO, sodass sich die Datenbankabfragen über den kompletten Quellcode verteilen. Während das bei Beispielapplikationen oder kleinen Anwendungen kein Problem darstellt, geht bei größeren Anwendungen mit vielen verschiedenen Datenmodellen schnell die Übersichtlichkeit verloren. Die Verwendung eines Datenzugriffsobjektes führt zu einem \tete{Single Point of Responsibility}\footnote{ Single Responsibility Principle (SRP), vgl. \cite[p.~339]{design-patterns}}
  und stärkt somit die Struktur des gesamten Projektes. 
 
 \subsection{Grenzen des data-centric Designs}
@@ -202,13 +204,13 @@ Ohne die Verwendung eines DAO gibt es in diesem Design keinen Single point of re
 %--------------------------------------------------------------------------------------------------------------------------------------------
 
 \section{Eventsystem}
-In den Anforderungen REQXXX wurde festgehalten, dass die von den Teams erstellten Dokumente aus der jeweiligen \gls{Box}\footnote{\url{http://box.com}} für die Studierenden in Project-Zoom zur Verfügung stehen. Diese Verfügbarkeit soll schnellstmöglich nach Hinzufügen einer neuen Datei zur \gls{Box} gegeben sein (vgl. REQXXX). Hierfür ist es sinnvoll ein asynchrones System zu bauen.  Neben der Anbindung von \gls{Box} ist für die Zukunft auch der Zugriff auf facebook\footnote{The Facebook, \url{http://facebook.com}}, Dropbox\footnote{Dropbox, \url{http://dropbox.com}} und Netzwerkdateisysteme\footnote{Ein Netzwerkdateisystem ist ein Dateisystem, auf welches von Rechnern im selben Netzwerk zugegriffen werden kann, um zum Beispiel Dateien zu lesen.} vorgesehen. Es zeigt sich, dass ein paralleles, unabhängiges Abfragen der einzelnen Dienste notwendig ist.
+In der Anforderung \ref{itm:f2} wurde festgehalten, dass die von den Teams erstellten Dokumente aus der jeweiligen \gls{Box}\footnote{\url{http://box.com}} für die Studierenden in Project-Zoom zur Verfügung stehen sollen. Diese Verfügbarkeit soll schnellstmöglich nach Hinzufügen einer neuen Datei zur \gls{Box} gegeben sein (vgl. Anforderung \ref{itm:nf2}). Hierfür ist es sinnvoll ein asynchrones System zu bauen.  Neben der Anbindung von \gls{Box} ist für die Zukunft auch der Zugriff auf facebook\footnote{The Facebook, \url{http://facebook.com}}, Dropbox\footnote{Dropbox, \url{http://dropbox.com}} und Netzwerkdateisysteme\footnote{Ein Netzwerkdateisystem ist ein Dateisystem, auf welches von Rechnern im selben Netzwerk zugegriffen werden kann, um zum Beispiel Dateien zu lesen.} vorgesehen. Es zeigt sich, dass ein paralleles, unabhängiges Abfragen der einzelnen Dienste notwendig ist.
 
-Ein Eventsystem basiert auf dem Prinzip des Abonnierens und Veröffentlichens von Nachrichten und modelliert eine Eine-zu-Viele-Relation. Ein sogenannter \tete{Publisher} sendet seine Events, welche anschließend vom \tete{Dispatcher} an die \tete{Subscriber} verteilt werden. Die Subscriber können dieses Event schließlich abarbeiten. Dabei entsteht eine Asynchronität, da der Sender beim Emittieren einer Nachricht sofort sequentiell weiterarbeiten kann und die Bearbeitung des Events nicht abwarten muss.
+Ein Eventsystem basiert auf dem Prinzip des Abonnierens und Veröffentlichens von Nachrichten und modelliert eine Eine-zu-Viele-Relation. Ein sogenannter \tete{Publisher} sendet seine Events, welche anschließend vom \tete{Dispatcher} an die \tete{Subscriber} verteilt werden. Die Subscriber können dieses Event schließlich abarbeiten (vgl. \cite[p.~327]{gang-of-four}). Das Publisher-Subscriber Modell kann sowohl synchron als auch asynchron implementiert werden. Bei einer asynchronen Umsetzung wird ausgenutzt, dass der Sender beim Emittieren einer Nachricht sofort sequentiell weiterarbeiten kann und die Bearbeitung des Events nicht abwarten muss.
 
 \begin{figure}[h]  
   \centering     
-  \includegraphics[width=1.0\textwidth]{img/event_system.png}  
+  \includegraphics[width=1.0\textwidth]{img/eventsystem.pdf}  
    \caption{Funktionsweise des Eventsystems an einem Beispiel}   
   \label{fig:event-system} 
 \end{figure}

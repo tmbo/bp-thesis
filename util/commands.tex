@@ -57,6 +57,19 @@
    xleftmargin=0.04\textwidth, 
    morekeywords={}]}
 %\end{lstlisting}
+
+\makeatletter 
+\let\orglabelinglabel\labelinglabel 
+\renewcommand*{\labelinglabel}[1]{%   
+  \let\orglabel\label   
+  \let\label\@gobble   
+  \phantomsection   
+  \edef\@currentlabel{#1}%   
+  %\edef\@currentlabelname{#1}%   
+  \let\label\orglabel   
+  \orglabelinglabel{\textbf{#1:}}% 
+} 
+\makeatother 
 																									
 \newcommand{\methode}[1]{\sl #1\normalfont}
 \newcommand{\klasse}[1]{\tt #1\normalfont}
