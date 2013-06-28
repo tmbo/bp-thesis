@@ -95,8 +95,8 @@ In der Abbildung \ref{fig:projects} sind die Abhängigkeiten der Pakete voneinan
 
 \section{Data-centric Design in Project-Zoom}
 \label{sec:umsetzung_dcd}
-Die REST-Schnittstelle von Project-Zoom entspricht der einer klassischen CRUD-Anwendung. Aufgrund der geringen Business-Logik liegt es nahe, das beschriebene data-centric Design zu verwenden. Um die Wartung des Systems zu erleichtern, werden Datenzugriffsobjekte für jedes Datenmodell verwendet.
-\\\\\\
+Die REST-Schnittstelle von Project-Zoom entspricht der einer klassischen CRUD-Anwendung. Eine Übersicht über alle REST-Routen finden sich im Anhang \ref{sec:rest-interaface}. Aufgrund der geringen Business-Logik liegt es nahe, das beschriebene data-centric Design zu verwenden. Um die Wartung des Systems zu erleichtern, werden Datenzugriffsobjekte für jedes Datenmodell verwendet.
+\\\\\\ % FIX
 \lstinputlisting[caption=Macro-Verwendung zur Generierung einer JSON-Konvertierung, label=lst:json-format, language=scala]{code/json_reads.scala}
 
 Für einige Teile der Anwendung ist es notwendig die JSON-Strukturen der Datenbank in Scala-Objekte umzuwandeln. Dies ist zum Beispiel für User-Objekte der Fall, welche von der Authentifizierungsbibliothek SecureSocial verwendet werden. Play erlaubt die Generierung der Transformationsfunktionen mit Hilfe von Macros\footnote{JSON Macro incepetion, \url{http://www.playframework.com/documentation/2.1.1/ScalaJsonInception} (Zugriff 26.06.13)}. Das bedeutet, dass die Anwendung die Datenklassen des Modells definiert und die Funktionen zur Konvertierung von und nach JSON während der Kompilierung vom Framework übernommen werden. Ein Beispiel für solch eine Transformation ist in dem Quelltext \ref{lst:json-format} mit der Variablen \tete{userFormat} gegeben. Diese ist in der Lage, zwischen den beispielhaften Repräsentationen 

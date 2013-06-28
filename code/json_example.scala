@@ -1,5 +1,7 @@
 val json = Json.obj(
-  "firstName" -> "max", "latsName" -> "Mustermann", "age" -> 17)
+  "firstName" -> "max", 
+  "latsName" -> "Mustermann", 
+  "age" -> 17)
 
 val addUserRole = JsPath.json.update(
   (JsPath \ "role").json.put(JsString("User")))
