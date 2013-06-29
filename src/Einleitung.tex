@@ -1,7 +1,7 @@
 %!TEX root = ../Bachelorarbeit.tex
 \chapter{Motivation}
 \label{chap:Einleitung}
-Die HPI School of Design Thinking lehrt die kreative Herangehensweise an Probleme und die Entwicklung einfallsreicher Lösungen. Die Lehre findet dabei in verschiedenen Kursen statt. Studierende können sich die Grundlagen im \gls{Basic-Track} aneignen und ihr Wissen nach erfolgreicher Absolvierung im  \gls{Advanced-Track} vertiefen. Neben den studentischen Kursen bietet die D-School auch Weiterbildungskurse für Unternehmen an.
+Die HPI School of Design Thinking lehrt die kreative Herangehensweise an Probleme und die Entwicklung einfallsreicher Lösungen. Die Lehre findet dabei in verschiedenen Kursen statt. Studierende können sich die Grundlagen im Basic-Track aneignen und ihr Wissen nach erfolgreicher Absolvierung im Advanced-Track vertiefen. Neben den studentischen Kursen bietet die D-School auch Weiterbildungskurse für Unternehmen an.
 
 In der Regel besteht ein Design Thinking-Kurs aus mehreren multidisziplinären Kleingruppen von üblicherweise sechs Teilnehmern, die gemeinsam an einem Projekt arbeiten. Das Projektthema wird dabei entweder von der D-School selbst oder, vor allem bei längeren Projekten, von externen Projektpartnern vorgeschlagen. 
 
@@ -15,14 +15,14 @@ Bei der Arbeit an einem Projekt durchlaufen die Teilnehmenden verschiedene Phase
 \end{figure}
 \footnotetext{Quelle \cite[p.~114]{design-thinking}}
 
-Im Verlauf des Projektes kommt es durchaus vor, dass ein Team eine Phase mehrmals durchläuft oder in eine vorherige Phase zurückkehrt. Dies erschwert die Organisation der Dokumente, z.B. in einer einfachen hierarchischen Struktur. Weiterhin ist es schwierig, allein aus den Dokumenten deren Entstehungsreihenfolge und Bedeutung zu erfassen. Meist entstehen während eines drei Monate andauernden Projektes verschiedenste Präsentationen, Zusammenfassungen, Prototypen, Bilder von Whiteboards und Interviewdokumentationen. Diese werden in der Regel in der von den Studierenden bevorzugten Art und Weise gespeichert und verwaltet, beispielsweise mit Hilfe von \tete{Dropbox}\footnote{Dropbox, \url{http://www.dropbox.com} (Zugriff 13.06.13)}, \tete{Google Docs}\footnote{Google Docs, \url{http://drive.google.com} (Zugriff 12.06.13)} oder \tete{\gls{Box}}\footnote{Box, \url{http://box.com} (Zugriff 13.06.13)}.
+Im Verlauf des Projektes kommt es durchaus vor, dass ein Team eine Phase mehrmals durchläuft oder in eine vorherige Phase zurückkehrt. Dies erschwert die Organisation der Dokumente, z.B. in einer einfachen hierarchischen Struktur. Weiterhin ist es schwierig, allein aus den Dokumenten deren Entstehungsreihenfolge und Bedeutung zu erfassen. Meist entstehen während eines drei Monate andauernden Projektes verschiedenste Präsentationen, Zusammenfassungen, Prototypen, Bilder von Whiteboards und Interviewdokumentationen. Diese werden in der Regel in der von den Studierenden bevorzugten Art und Weise gespeichert und verwaltet, beispielsweise mit Hilfe von \tete{Dropbox}\footnote{Dropbox, \url{http://www.dropbox.com} (Zugriff 13.06.13)}, \tete{Google Docs}\footnote{Google Docs, \url{http://drive.google.com} (Zugriff 12.06.13)} oder \tete{Box}\footnote{Box, \url{http://box.com} (Zugriff 13.06.13)}.
 
-Das Verständnis der Dokumentation ist sowohl für das Projekt selbst, zum Verstehen und Erlernen des Prozesses, als auch als Ideenquelle für zukünftige Projekte wichtig. Ferner sind die erstellten Artefakte nützlich, um neue Projektpartner anzuwerben, welche zukünftige Projekte anbieten. 
+Das Verständnis der Dokumentation ist sowohl für das Projekt selbst, zum Verstehen und Erlernen des Prozesses, als auch als Ideenquelle für zukünftige Projekte wichtig. Ferner sind die Projektergebnisse nützlich, um neue Projektpartner anzuwerben, welche zukünftige Projekte anbieten. 
 
 \section{Systemanforderungen}
 \label{sec:requirements}
 
-Im Verlauf des Projektes wurden in Zusammenarbeit mit den Mitarbeitern und Studierenden der D-School verschiedene Anforderungen an Project-Zoom als Projektverwaltungs- und Dokumentationstool aufgestellt (vgl. \cite{requirements}).  Aus diesen leiten sich die umgesetzte Architektur und die verwendeten Technologien ab. In dieser Arbeit aufgeführt sind nur die für diesen Teil des Projektes wichtigsten und relevanten Anforderungen. Für eine Analyse der Nutzergruppen und deren Bedürfnisse sei auf \cite{requirements}  verwiesen.
+Im Verlauf des Projektes wurden in Zusammenarbeit mit den Mitarbeitern und Studierenden der D-School verschiedene Anforderungen an Project-Zoom als Projektverwaltungs- und Dokumentationstool aufgestellt (vgl. \cite{requirements}).  Aus diesen leiten sich die umgesetzte Architektur und die verwendeten Technologien ab. In dieser Arbeit aufgeführt sind nur die für diesen Teil des Projektes wichtigen und relevanten Anforderungen. Für eine Analyse der Nutzergruppen und deren Bedürfnisse sei auf \cite{requirements}  verwiesen.
 
 \paragraph{Funktionale Anforderungen}
 \label{sec:functional}
@@ -31,15 +31,15 @@ Im Verlauf des Projektes wurden in Zusammenarbeit mit den Mitarbeitern und Studi
 
   Dies ergibt sich aus dem Vorhandensein von Geheimhaltungsverträgen (NDA) für Projekte und dem Wunsch der D-School den Zugriff auf Projekte einzuschränken. 
 
-  \item[F2\label{itm:f2}] Innerhalb der Anwendung sollen die Daten aus \tete{Filemaker}\footnote{Filemaker ist die Datenbank, welche die D-School verwendet um Projekt und Userdaten zu speichern.\\ \url{http://www.filemaker.com} (Zugriff 29.06.13)}, Box, Netzwerkdateisystemen\footnote{Ein Netzwerkdateisystem ist ein Dateisystem, auf welches von Rechnern im selben Netzwerk zugegriffen werden kann, um zum Beispiel Dateien zu lesen.} und \tete{Facebook}\footnote{The Facebook, \url{http://www.facebook.com} (Zugriff 29.06.13)} aggregiert werden.
+  \item[F2\label{itm:f2}] Innerhalb der Anwendung sollen die Daten aus \tete{Filemaker}\footnote{Filemaker ist die Datenbank, welche die D-School verwendet um Projekt und Userdaten zu speichern.\\ \url{http://www.filemaker.com} (Zugriff 29.06.13)}, Box, \gls{Netzwerkdateisystem}en\footnote{Ein \gls{Netzwerkdateisystem} ist ein Dateisystem, auf welches von Rechnern im selben Netzwerk zugegriffen werden kann, um zum Beispiel Dateien zu lesen.} und \tete{Facebook}\footnote{The Facebook, \url{http://www.facebook.com} (Zugriff 29.06.13)} aggregiert werden.
 
   Die angegebene Reihenfolge entspricht dabei dem Wunsch der Umsetzung von der D-School.
 \\ %FIX TO GET ON A NEW PAGE
   \item[F3\label{itm:f3}] Aggregierte Daten sollen nicht gelöscht werden. 
 
-  Es kann durchaus vorkommen, dass Daten in aggregierten Quellen nach einiger Zeit gelöscht werden müssen. Die Anwendung soll die Daten dann weiterhin vorhalten können. Dass eine Ressource in der originalen Quelle nicht mehr vorhanden ist, kann zum Beispiel durch eine Markierung in einer Datenbank erfolgen.
+  Es kann durchaus vorkommen, dass Daten in aggregierten Quellen nach einiger Zeit gelöscht werden müssen. Die Anwendung soll die Daten dann weiterhin vorhalten können. Dass eine \gls{Ressource} in der originalen Quelle nicht mehr vorhanden ist, kann zum Beispiel durch eine Markierung in einer Datenbank erfolgen.
 
-  \item[F4\label{itm:f4}] Die Anbindung von neuen Datenquellen muss möglich sein. Das Core-Backend soll dabei unverändert bleiben.
+  \item[F4\label{itm:f4}] Die Anbindung von neuen Datenquellen muss möglich sein. Das Core-\gls{Backend} soll dabei unverändert bleiben.
 
   Über die Zeit wandeln sich die von den Studierenden verwendeten Werkzeuge zur Dokumentation. Dies muss bei der Anwendungskonzeption berücksichtigt werden.
 
@@ -56,9 +56,9 @@ Im Verlauf des Projektes wurden in Zusammenarbeit mit den Mitarbeitern und Studi
 \label{sec:nonfunctional}
 
 \begin{labeling}{\textbf{NF1:}}
-  \item[NF1\label{itm:nf1}] Es sollen 100 Nutzer gleichzeitig in der Lage sein, das Backend zu nutzen.
+  \item[NF1\label{itm:nf1}] Es sollen 100 Nutzer gleichzeitig in der Lage sein, das \gls{Backend} zu nutzen.
 
-  Dies Angabe entsteht aus der Abschätzung für die maximale Anzahl aller Teilnehmer und Lehrenden von etwa 100 Nutzern. Da keine anderen Nutzer Zugriff auf das System haben sollen, entspricht dies einer oberen Schranke für die Anzahl der aktiven Nutzer. 
+  Die Anzahl von 100 Nutzern ergibt sich als Summe der maximale Anzahl aller Teilnehmenden und Lehrenden. Da keine anderen Nutzer Zugriff auf das System haben sollen, entspricht dies einer oberen Schranke für die Anzahl der aktiven Nutzer. 
 
   \item[NF2\label{itm:nf2}]  Der Server muss die Updates aus den Datenquellen innerhalb von einer Minute verarbeiten.
 
@@ -77,11 +77,11 @@ Im Entwicklungsprozess einer Lösung zur Verbesserung der Dokumentation in der D
   \label{fig:projectzoom_prototype} 
 \end{figure}
 
-In mehreren Iterationen wurde Project-Zoom entwickelt und verfeinert. Einer der ersten Entwürfe der Nutzoberfläche ist in Abbildung \ref{fig:projectzoom_prototype} zu sehen. Das Konzept von Project-Zoom ist die Verbindung einer Projektübersicht mit einem Projekteinblick. Der Nutzer soll die Möglichkeit haben, einen Überblick über alle Projekte, und bei Bedarf einen tieferen Einblick in ein konkretes Projekt, zubekommen.
+In mehreren Iterationen wurde Project-Zoom entwickelt und verfeinert. Einer der ersten Entwürfe der Nutzoberfläche ist in Abbildung \ref{fig:projectzoom_prototype} zu sehen. Das Konzept von Project-Zoom ist die Verbindung einer Projektübersicht mit einem Projekteinblick. Der Nutzer soll die Möglichkeit haben einen Überblick über alle Projekte, und bei Bedarf einen tieferen Einblick in ein konkretes Projekt, zu bekommen.
 
-Project-Zoom soll der Verbesserung der Dokumentation dienen. Dazu sollen die von den Studierenden erzeugten Artefakte durch manuelles Anordnen in eine Form gebracht werden, welche den Prozess der Gruppe visualisiert. Die Mitarbeiter der D-School können die entstandenen Graphen anschließend nutzen, um die Projektverläufe zu analysieren und gegebenenfalls Abläufe innerhalb einer Design Thinking-Phase anzupassen (vgl. Interview mit Claudia Nikolai im Anhang \ref{sec:interview_nikolai}).
+Project-Zoom soll der Verbesserung der Dokumentation dienen. Dazu sollen die von den Studierenden erzeugten \gls{Artefakt}e durch manuelles Anordnen in eine Form gebracht werden, welche den Prozess der Gruppe visualisiert. Die Mitarbeiter der D-School können die entstandenen Graphen anschließend nutzen, um die Projektverläufe zu analysieren und gegebenenfalls Abläufe innerhalb einer Design Thinking-Phase anzupassen (vgl. Interview mit Claudia Nikolai im Anhang \ref{sec:interview_nikolai}).
 
-Für eine reibungslose Integration des Systems ist vor allem die Anbindung an bereits existierende IT-Systeme  und die von den Studierenden für das Projekt verwendete Software wichtig (vgl. Anforderung \ref{itm:f2}). Änderungen an diesen externen Diensten und der Auswahl der anzubindenden Datenspeicher ist über die Zeit sehr wahrscheinlich. Deshalb muss das System modular aufgebaut sein, um nachträglich neue Dienste anbinden zu können, ohne den Backend-Core zu verändern.
+Für eine reibungslose Integration des Systems ist vor allem die Anbindung an bereits existierende IT-Systeme  und die von den Studierenden für das Projekt verwendete Software wichtig (vgl. Anforderung \ref{itm:f2}). Änderungen an diesen externen Diensten und der Auswahl der anzubindenden Datenspeicher ist über die Zeit sehr wahrscheinlich. Deshalb muss das System modular aufgebaut sein, um nachträglich neue Dienste anbinden zu können, ohne den \gls{Backend}-Core zu verändern.
 
 \section{Abgrenzung}
 Die Arbeit beschreibt und bezieht sich auf das Bachelorprojekt „From Creative Ideas to Well-Founded Engineering“ und das umgesetzte Softwaresystem Project-Zoom. Insgesamt haben sechs Studierende an dem Projekt gearbeitet, die in ihren Bachelorarbeiten Project-Zoom aus verschiedenen Blickwinkeln und mit verschiedenen Schwerpunkten beschreiben.
@@ -90,9 +90,9 @@ Tom Herolds Arbeit \cite{bp-tomh} beinhaltet die Interaktion mit kontextsensitiv
 
 Die Ausführungen von Anita Diekhoff \cite{bp-anita}  beschäftigen sich mit der Übersicht über Projekte und gehen näher auf Layoutfunktionalitäten in interaktiven Graphen ein.
 
-Norman Rzepkas Bachelorarbeit \cite{bp-norman} thematisiert die webbasierte, eventgesteuerte, clientseitige Architektur von Project-Zoom. Dabei wird näher darauf eingegangen, wie die Daten von der Datenbank über das Backend asynchron an den Client ausgeliefert und angezeigt werden.
+Norman Rzepkas Bachelorarbeit \cite{bp-norman} thematisiert die webbasierte, eventgesteuerte, clientseitige Architektur von Project-Zoom. Dabei wird näher darauf eingegangen, wie die Daten von der Datenbank über das \gls{Backend} asynchron an den Client ausgeliefert und angezeigt werden.
 
-Die Arbeit von Dominic Bräunlein \cite{bp-dome} erläutert das Generieren und Bereitstellen von semantischen \gls{Thumbnails}, um dem Nutzer das Erkennen der Dokumente seines Projektes zu erleichtern und somit selbst bei wenig verfügbarem Platz so viele Informationen eines Dokumentes anzeigen zu können wie möglich. 
+Die Arbeit von Dominic Bräunlein \cite{bp-dome} erläutert das Generieren und Bereitstellen von semantischen Thumbnails, um dem Nutzer das Erkennen der Dokumente seines Projektes zu erleichtern und somit selbst bei wenig verfügbarem Platz so viele Informationen eines Dokumentes anzeigen zu können wie möglich. 
 
 Thomas Werkmeisters Arbeit \cite{bp-tewe} befasst sich mit der Anbindung externer Systeme zur Integration von Daten. Diese aggregierte Datenbasis ist die Grundlage für die Wissensbasis und die einzelnen Projekte.
 
@@ -103,6 +103,6 @@ Thomas Werkmeisters Arbeit \cite{bp-tewe} befasst sich mit der Anbindung externe
   \label{fig:architecture-overview} 
 \end{figure}
 
-Die Abbildung \ref{fig:architecture-overview} zeigt einen groben Überblick über die Architektur des Systems. Der für diese Arbeit relevante Teil ist dabei durch einen gestrichelten Rahmen gekennzeichnet. Die Komponenten, die in den Arbeiten \cite{bp-tewe} (Konnektoren) und \cite{bp-dome} (Thumbnailgenerator) beschrieben sind, sind mit dem hier erläuterten Systemteil mittels eines Eventsystems verbunden. Das Client-Frontend ist über eine REST-Anbindung\footnote{vgl. Konzept des Representational State Transfer in \cite{rest}} an das Server-Backend angeschlossen. Mit der clientseitigen Implementierung der REST-Schnittstelle beschäftigt sich \cite{bp-norman}.
+Die Abbildung \ref{fig:architecture-overview} zeigt einen groben Überblick über die Architektur des Systems. Der für diese Arbeit relevante Teil ist dabei durch einen gestrichelten Rahmen gekennzeichnet. Die Komponenten, die in den Arbeiten \cite{bp-tewe} (\gls{Konnektor}en) und \cite{bp-dome} (Thumbnailgenerator) beschrieben sind, sind mit dem hier erläuterten Systemteil mittels eines \gls{Eventsystem}s verbunden. Das Client-\gls{Frontend} ist über eine REST-Anbindung\footnote{vgl. Konzept des Representational State Transfer in \cite{rest}} an das Server-\gls{Backend} angeschlossen. Mit der clientseitigen Implementierung der REST-Schnittstelle beschäftigt sich \cite{bp-norman}.
 
-In dieser Arbeit wird zunächst ein Überblick über das Gesamtsystem gegeben. Dazu werden die Anforderungen der D-School an das Backend analysiert, welche als Grundlage für die Wahl der verwendeten Technologien dienen. Anschließend wird die Architektur des Backends näher erläutert. Hier liegt der Hauptfokus zunächst auf einer neuen Art und Weise, eine Datenbank an eine Webapplikation anzubinden. Im Anschluss werden einige Feinheiten und ausgewählte Stellen der Datenmodellierung von Project-Zoom beleuchtet. Den Abschluss bildet die architekturelle Grundlage zur Anbindung externer Systeme für die Erweiterung von Project-Zoom.
+In dieser Arbeit wird zunächst ein Überblick über das Gesamtsystem gegeben. Dazu werden die Anforderungen der D-School an das \gls{Backend} analysiert, welche als Grundlage für die Wahl der verwendeten Architektur dienen. Anschließend wird die Architektur des \gls{Backend}s näher erläutert. Hier liegt der Hauptfokus zunächst auf einer neuen Art und Weise, eine Datenbank an eine Webapplikation anzubinden. Im Anschluss werden einige Feinheiten und ausgewählte Stellen der Umsetzung von Project-Zoom beleuchtet. Zum Abschluss werden die aufgestellten Anforderungen auf ihre Umsetzung in Project-Zoom geprüft.

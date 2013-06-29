@@ -97,7 +97,17 @@ Project-Zoom wurde mit den folgenden Einstellungen für Apache Bench getestet:
 ab -g output100.txt -c 10 -n 100000 http://localhost:9000/projects
 \end{lstlisting}
 
-Weiterhin wurde noch ein Session-Cookie übergeben, um auf die geschütze Ressource zugreifen zu dürfen. Die Ergebnisse sind in den Abbildungen \ref{fig:perf1} und \ref{fig:perf2} zu sehen. Die Grafiken wurden mit Hilfe von \url{https://loadosophia.org} erstellt.
+Eigenschaften des getesteten Systems:
+\begin{itemize}
+\item 4 Kerne + HT
+\item 8GB RAM
+\item 256GB SSD Festplatte
+\item OS X 10.8.4
+\item ApacheBench, Version 2.3 Revision: 1430300
+\item Java Version 1.7.0\_21 / Scala Version 2.10.1 / Play Version 2.1
+\end{itemize}
+
+Zuzüglich zu den angegebenen Parametern wurde noch ein Session-Cookie übergeben, um auf die geschütze \gls{Ressource} zugreifen zu dürfen. Die Ergebnisse sind in den Abbildungen \ref{fig:perf1} und \ref{fig:perf2} zu sehen. Die Grafiken wurden mit Hilfe von \url{https://loadosophia.org} erstellt.
 
 \begin{figure}
   \centering     
@@ -116,7 +126,7 @@ Weiterhin wurde noch ein Session-Cookie übergeben, um auf die geschütze Ressou
 
 \section{Überblick über die vorhandenen Events}
 \label{event-overiview}
-In der Tabelle \ref{tab:events} sind alle Events zu sehen, die mit dem Backend-Core interagieren.
+In der Tabelle \ref{tab:events} sind alle Events zu sehen, die mit dem \gls{Backend}-Core interagieren.
 
 \begin{table}
     \begin{tabular}{|l|l|p{4.8cm}|}
@@ -125,33 +135,33 @@ In der Tabelle \ref{tab:events} sind alle Events zu sehen, die mit dem Backend-C
     ArtifactFound       & \begin{lstlisting}[gobble=4] 
     originalStream: InputStream
     artifact: ArtifactLike
-    \end{lstlisting}                      & Artefakt von Konnektor gefunden                            \\ \hline
+    \end{lstlisting}                      & \gls{Artefakt} von \gls{Konnektor} gefunden                            \\ \hline
     ArtifactDeleted     & \begin{lstlisting}[gobble=4]
     artifact: ArtifactLike
-    \end{lstlisting}                                                   & Löschung von Artefakt durch Konnektor festgestellt         \\ \hline
+    \end{lstlisting}                                                   & Löschung von \gls{Artefakt} durch \gls{Konnektor} festgestellt         \\ \hline
     ArtifactAggregation & \begin{lstlisting}[gobble=4]
     _project: String
     l: List[ArtifactFound]
-    \end{lstlisting}                                 & Auflistung aller Artefakte eines Projektes durch Konnektor \\ \hline
+    \end{lstlisting}                                 & Auflistung aller \gls{Artefakt}e eines Projektes durch \gls{Konnektor} \\ \hline
     ArtifactRenamed     & \begin{lstlisting}[gobble=4]
     artifact: ArtifactLike
     name: String
-    \end{lstlisting}                                     & Umbenennung von Artefakt durch Konnektor festgestellt      \\ \hline
+    \end{lstlisting}                                     & Umbenennung von \gls{Artefakt} durch \gls{Konnektor} festgestellt      \\ \hline
     ArtifactMoved       & \begin{lstlisting}[gobble=4]
     artifact: ArtifactLike
     path: String
-    \end{lstlisting}                                     & Verschiebung von Artefakt durch Konnektor festgestellt     \\ \hline
+    \end{lstlisting}                                     & Verschiebung von \gls{Artefakt} durch \gls{Konnektor} festgestellt     \\ \hline
     ResourceFound       & \begin{lstlisting}[gobble=4]
     inputStream: InputStream
     artifact: ArtifactLike
     resource: ResourceLike
-    \end{lstlisting} & Neue Resource für Artefakt gefunden                        \\ \hline
+    \end{lstlisting} & Neue Resource für \gls{Artefakt} gefunden                        \\ \hline
     ArtifactUpdated     & \begin{lstlisting}[gobble=4]
     artifact: ArtifactLike
-    \end{lstlisting}                                                   & Artefakt in der DB geändert                                \\ \hline
+    \end{lstlisting}                                                   & \gls{Artefakt} in der DB geändert                                \\ \hline
     ArtifactInserted    & \begin{lstlisting}[gobble=4]
     artifact: ArtifactLike    
-    \end{lstlisting}                                               & Artefakt zur DB hinzugefügt                                \\ \hline
+    \end{lstlisting}                                               & \gls{Artefakt} zur DB hinzugefügt                                \\ \hline
     ResourceUpdated     & \begin{lstlisting}[gobble=4]
     file: File
     artifact: ArtifactLike
@@ -164,13 +174,13 @@ In der Tabelle \ref{tab:events} sind alle Events zu sehen, die mit dem Backend-C
     \end{lstlisting}               & Resource zur DB hinzugefügt                                \\ \hline
     ProjectFound        & \begin{lstlisting}[gobble=4]
     project: ProjectLike
-    \end{lstlisting}                                                     & Projekt von Konnektor gefunden                             \\ \hline
+    \end{lstlisting}                                                     & Projekt von \gls{Konnektor} gefunden                             \\ \hline
     ProjectAggregation  & \begin{lstlisting}[gobble=4]
     l: List[ProjectFound]      
     \end{lstlisting}                                               & Auflistung mehrerer gefundener Projekte                    \\ \hline
     ProfileFound        & \begin{lstlisting}[gobble=4]
     profile: Profile   
-    \end{lstlisting}                                                       & Profil von Konnektor gefunden                              \\ \hline
+    \end{lstlisting}                                                       & Profil von \gls{Konnektor} gefunden                              \\ \hline
     ProfileAggregation  & \begin{lstlisting}[gobble=4]
     l: List[ProfileFound]  
     \end{lstlisting}                                                   & Auflistung mehrerer gefundener Profile                     \\ \hline
@@ -179,27 +189,27 @@ In der Tabelle \ref{tab:events} sind alle Events zu sehen, die mit dem Backend-C
     patch: JsValue
     \end{lstlisting}                                             & Graph in der DB mit Patch geändert                         \\ \hline
     \end{tabular}
-    \caption{Übersicht über Events des Backend-Core}
+    \caption{Übersicht über Events des \gls{Backend}-Core}
     \label{tab:events}
 \end{table}
-
+\hfill\\
 \textsc{ArtifactActor}
 \begin{labeling}{\textbf{Subscription f{\"u}r:}}
   \item[Publishes] ArtifactUpdated, ArtifactInserted, ResourceUpdated, ResourceInserted
   \item[Subscription f{\"u}r] ArtifactFound, ArtifactDeleted, ArtifactAggregation, ArtifactRenamed, ArtifactMoved, ResourceFound
 \end{labeling}
-
+\hfill\\
 \textsc{KnowledgeActor}
 \begin{labeling}{\textbf{Subscription f{\"u}r:}}
   \item[Subscription f{\"u}r] ProjectFound, ProjectAggregation, ProfileFound, ProfileAggregation
 \end{labeling}
-
-\textsc{Konnektoren}
+\hfill\\
+\textsc{\gls{Konnektor}en}
 \begin{labeling}{\textbf{Subscription f{\"u}r:}}
   \item[Publishes] ProfileAggregation, ProjectAggregation, ArtifactFound, ArtifactRenamed, ArtifactMoved, ArtifactDeleted, ArtifactAggregation
 \end{labeling}
-
-\textsc{Thumbnailgenerator}
+\hfill\\
+\textsc{\gls{Thumbnail}generator}
 \begin{labeling}{\textbf{Subscription f{\"u}r:}}
   \item[Publishes] ResourceFound
   \item[Subscription f{\"u}r] ResourceInserted, ResourceUpdated
@@ -207,3 +217,303 @@ In der Tabelle \ref{tab:events} sind alle Events zu sehen, die mit dem Backend-C
 
 \appendixChapter{REST-Schnittstelle}
 \label{sec:rest-interaface}
+
+\section*{Datentypen}
+\begin{tabular}{ l | l }
+\hline
+identifier & example \\ \hline
+int & 3 \\
+double & 3.5 \\
+bool & true \\
+"string" & "test" \\
+"object\_id" & "512d2218c2c1804377000005"\footnotemark[1] \\
+"date" & "2013-02-26T02:00:00Z"\footnotemark[2] \\
+\{object\} & \verb+{ "test": 123 }+ \\ \hline
+\end{tabular}
+\footnotetext[1]{Mongo ObjectId, \url{http://docs.mongodb.org/manual/reference/object-id/}, accessed 25/06/13}
+\footnotetext[2]{ISO 8601, \url{http://en.wikipedia.org/wiki/ISO_8601}, accessed 25/06/13}
+
+\section*{Allgemein}
+\begin{lstlisting}[language=restinterface]
+GET /resources
+# returns the 50 first resources
+
+GET /resources?limit=100
+# returns the 100 first resources
+
+GET /resources?offset=30&limit=10
+# returns 10 resources from the 30th
+
+GET /resources/:id
+# returns all details of a specific resource
+
+
+
+
+
+
+
+
+PUT /resources/:id
+# replaces this item 
+=> 200 OK
+or
+=> 400 Bad Request
+   {
+     errors: []
+   }
+
+
+PATCH /resources/:id
+# incrementally updates this item
+=> 200 OK
+or
+=> 400 Bad Request
+   {
+     errors: []
+   } 
+
+
+POST /resources
+# creates a new item
+=> 200 OK
+or
+=> 400 Bad Request
+   {
+     errors: []
+   }
+
+
+DELETE /resources/:id
+# deletes this item
+=> 200 OK
+or
+=> 400 Bad Request
+   {
+     errors: []
+   }
+
+\end{lstlisting}
+
+\newpage
+\section*{Projekte}
+\begin{lstlisting}[language=restinterface]
+GET /projects
+{
+  "limit": int,
+  "offset": int,
+  "content": [
+    {
+      "id": "object_id",
+      "name": "string",
+      "length": "string",
+      "season": "string",
+      "year": "string",
+      "_graphs": ["object_id", ...],
+      "_tags": ["object_id", ...]
+    }, ...
+  ]
+}
+
+GET /projects/:id
+{
+  "id": "object_id",
+  "name": "string",
+  "length": "string",
+  "season": "string",
+  "year": "string",
+  "_graphs": ["object_id", ...],
+  "_tags": ["object_id", ...]
+}
+
+GET /projects/:id/artifacts
+{
+  "limit": int,
+  "offset": int,
+  "content": [
+    {
+      "id": "object_id",
+      "name": "string",
+      "path": "string",
+      "projectName": "string",
+      "resources": [
+        {
+          "hash": "string",
+          "name": "string",
+          "typ": "string"
+        }, ...
+      ],
+      "createdAt": int,
+      "isDeleted": bool,
+      metadata: {object}
+    }, ...
+  ]
+}
+
+
+POST /projects/:id/graphs
+=> 303 See other
+Location: /graphs/:graph_group
+
+\end{lstlisting}
+
+
+\section*{Artefakte}
+\begin{lstlisting}[language=restinterface]
+GET /artifacts/:id
+{
+  "id": "object_id",
+  "name": "string",
+  "path": "string",
+  "projectName": "string",
+  "resources": [
+    {
+      "hash": "string",
+      "name": "string",
+      "typ": "string"
+    }, ...
+  ],
+  "createdAt": int,
+  "isDeleted": bool,
+  metadata: {object}
+}
+
+GET /artifacts/:id/:typ/:name 
+=> 200 OK
+Content-Type: application/octet-stream
+\end{lstlisting}
+
+\newpage
+\section*{Tags}
+\begin{lstlisting}[language=restinterface]
+GET /tags
+{
+  "limit": int,
+  "offset": int,
+  "content": [
+    {
+      "color": {"r": int, "g": int, "b": int},
+      "id": "object_id",
+      "name": "string"
+    }, ...
+  ]
+}
+
+GET /tags/:name
+{
+  "color": {"r": int, "g": int, "b": int},
+  "id": "object_id",
+  "name": "string"
+}
+\end{lstlisting}
+
+
+\section*{User}
+\begin{lstlisting}[language=restinterface]
+GET /users
+{
+  "limit": int,
+  "offset": int,
+  "content": [
+    {
+      "id": "object_id",
+      "email": "string"
+      "firstName": "string",
+      "lastName": "string"
+    }, ...
+  ]
+}
+
+
+
+
+
+
+GET /users/:email
+{
+  "id": "object_id",
+  "email": "string"
+  "firstName": "string",
+  "lastName": "string"
+}
+\end{lstlisting}
+
+
+\section*{Graphen}
+\begin{lstlisting}[language=restinterface]
+GET /graphs
+{
+  "limit": int,
+  "offset": int,
+  "content": [
+    {
+      "_project": "object_id",
+      "id": "object_id",
+      "clusters": [
+        {
+          "comment": "string",
+          "content": [int, int, ...],
+          "id": int,
+          "phase": "string",
+          "waypoints": [{ "x": int, "y": int }, ...]
+        }, ...
+      ],
+      "edges": [
+        {
+          "from": int,
+          "to": int
+        }, ...
+      ],
+      "group": "string",
+      "nodes": [
+        {
+          "id": int,
+          "typ": "string",
+          "position": { "x": int, "y": int },
+          "payload": {object}
+        }, ...
+      ],
+      "version": int,
+    }, ...
+  ]
+}
+
+GET /graphs/:graph_group
+{
+  "_project": "object_id",
+  "id": "object_id",
+  "clusters": [
+    {
+      "comment": "string",
+      "content": [int, int, ...],
+      "id": int,
+      "phase": "string",
+      "waypoints": [{ "x": int, "y": int }, ...]
+    }, ...
+  ],
+  "edges": [
+    {
+      "from": int,
+      "to": int
+    }, ...
+  ],
+  "group": "string",
+  "nodes": [
+    {
+      "id": int,
+      "typ": "string",
+      "position": { "x": int, "y": int },
+      "payload": {object}
+    }, ...
+  ],
+  "version": int,
+}
+
+GET /graphs/:graph_group/:version
+# Same as GET /graphs/:graph_group
+
+PATCH  /graphs/:groupId/:version
+{
+  "version": int
+}
+\end{lstlisting}

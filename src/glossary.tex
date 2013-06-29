@@ -1,20 +1,97 @@
 %!TEX root = ../Bachelorarbeit.tex
-\newglossaryentry{Box}{
-  name={Box},
-  description={Cloud storage and collaboration solution for enterprises}
+\newglossaryentry{Netzwerkdateisystem}{
+  name={Netzwerkdateisystem},
+  description={Ein Dateisystem, auf dies von Rechnern im selben Netzwerk zugegriffen werden kann, um zum Beispiel Dateien zu lesen}
 }
 
-\newglossaryentry{Basic-Track}{
-  name={Basic-Track},
-  description={Cloud storage and collaboration solution for enterprises}
+\newglossaryentry{Artefakt}{
+  name={Artefakt},
+  description={Eine Informationseinheit, welche sich in dieser Arbeit auf die beim Dokumentationsprozess entstehenden, digitalen Informationen bezieht}
 }
 
-\newglossaryentry{Advanced-Track}{
-  name={Advanced-Track},
-  description={Cloud storage and collaboration solution for enterprises}
+\newglossaryentry{Ressource}{
+  name={Ressource},
+  description={Die digitale Repräsentation eines Artefakts. Verschiedene \gls{Thumbnail}s eines Artefakts sind beispielsweise jeweils eine Ressource}
 }
 
-\newglossaryentry{Thumbnails}{
-  name={Thumbnails},
-  description={Cloud storage and collaboration solution for enterprises}
+\newglossaryentry{Eventsystem}{
+  name={Eventsystem},
+  description={Ein System, dessen Architektur auf dem Zusammenspiel der Komponenten durch \tete{Events} (Ereignissen) basiert}
+}
+
+\newglossaryentry{Konnektor}{
+  name={Konnektor},
+  description={Komponente, die den Zugriff auf externe Dienste ermöglicht}
+}
+
+\newglossaryentry{Thumbnail}{
+  name={Thumbnail},
+  description={Miniaturbild, welches als Vorschau für ein Bild oder eine Datei dient}
+}
+ 
+\newglossaryentry{Aggregation}{
+  name={Aggregation},
+  description={Bezeichnet das sammeln von Informationen, meist aus verschiedenen Quellen.}
+}
+
+\newglossaryentry{Asynchronitaet}{
+  name={Asynchronität},
+  description={Beschreibt die zeitliche unabhängigkeit von zwei Ereignissen}
+}
+
+\newglossaryentry{Business-Logik}{
+  name={Business-Logik},
+  description={Teil eines Systems, welcher die Logik für die Umsetzung der Problemstellung implementiert}
+}
+
+\newglossaryentry{Framework}{
+  name={Framework},
+  description={In der Softwareentwicklung ein Rahmen, der unterschiedlichste Funktionalitäten zur Verfügung stellt und innerhalb dessen der Anwendungscode ausgeführt wird}
+}
+
+\newglossaryentry{Unveraenderbarkeit}{
+  name={Unveränderbarkeit},
+  description={Bezüglich des Statuses eines Objektes bedeuted dies, dass zur Laufzeit Attributen eines Objektes nach Erstellung dessen keine neuen Werte mehr zugewiesen werden können (vgl. \cite[p.~31]{immutability})}
+}
+
+\newglossaryentry{Backend}{
+  name={Backend},
+  description={Schicht eines Anwendung, welche bei einer Client-Server Applikation den Anwendungscode des Servers bezeichnet}
+}
+
+\newglossaryentry{Frontend}{
+  name={Frontend},
+  description={Schicht eines Anwendung, welche bei einer Client-Server Applikation den Anwendungscode des Client bezeichnet}
+}
+
+\newglossarystyle{super3colleft}{%
+  \renewenvironment{theglossary}%
+    {\tablehead{}\tabletail{}%
+     \begin{supertabular}{@{}>{\bfseries}lp{\glsdescwidth}}}%
+    {\end{supertabular}}%
+  \renewcommand*{\glossaryheader}{}%
+  \renewcommand*{\glsgroupheading}[1]{}%
+  \renewcommand*{\glossaryentryfield}[5]{%
+    \glsentryitem{##1}\glstarget{##1}{##2} & ##3 ##5\\}%
+  \renewcommand*{\glossarysubentryfield}[6]{%
+     &
+     \glssubentryitem{##2}%
+     \glstarget{##2}{\strut}##4 ##6\\}%
+  \renewcommand*{\glsgroupskip}{ & \\}%
+}
+
+\newlength{\acronymlabelwidth}
+\setlength{\acronymlabelwidth}{0.25\textwidth}
+\newglossarystyle{listwithwidth}{%
+  \renewenvironment{theglossary}%
+    {\begin{description}}{\end{description}}%
+  \renewcommand*{\glossaryheader}{}%
+  \renewcommand*{\glsgroupheading}[1]{}%
+  \renewcommand*{\glossaryentryfield}[5]{%
+    \item[\parbox{\acronymlabelwidth}{\glsentryitem{##1}\glstarget{##1}{##2}}]
+       ##3\glspostdescription\space ##5}%
+  \renewcommand*{\glossarysubentryfield}[6]{%
+    \glssubentryitem{##2}%
+    \glstarget{##2}{\strut}##4\glspostdescription\space ##6.}%
+  \renewcommand*{\glsgroupskip}{\indexspace}%
 }
