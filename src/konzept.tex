@@ -134,9 +134,10 @@ Das Ziel im data-centric Design ist die direkte Manipulation von Daten. Der Foku
 \begin{figure}[h]   
   \centering     
   \includegraphics[width=0.8\textwidth]{img/dataflow_dcd.pdf}  
-   \caption{Datenfluss zwischen Datenbank, \gls{Backend} und Client}   
+   \caption{Datenfluss zwischen Datenbank, \gls{Backend} und Client \protect\footnotemark}   
   \label{fig:dataflow} 
 \end{figure}
+\footnotetext{vgl. Pascal Voitet in \cite{jctc}}
 
 In diesem Datenfluss soll es keine implizite Umwandlung der Daten in Objekte der Programmiersprache\footnote{Es ist bekannt, dass die Repräsentation der Daten des Datenflusses ebenfalls in Objekten der Programmiersprache erfolgt (beispielsweise JSON-Objekte). Mit dem Ausdruck ist die Überführung der Daten aus einem allgemeinen Modell (z.B. JSON) in eine spezifische Objektdarstellung (z.B. ein Objekt einer User-Klasse) gemeint.} geben. Für ein einfaches Durchleiten der Daten aus der Datenbank zum Client oder von einer anderen Web\gls{Ressource} zum Client ist eine Umwandlung nicht notwendig oder sinnvoll. 
 
@@ -152,9 +153,10 @@ Das \tete{Object-relational Mapping} (ORM) wird auch als \tete{All-Model-Approac
 \begin{figure}[h]   
   \centering     
   \includegraphics[width=1.0\textwidth]{img/dataflow_orm.pdf}  
-   \caption{Datenfluss einer Applikation bei Verwendung eines ORM-\gls{Framework}s}   
+   \caption{Datenfluss einer Applikation bei Verwendung eines ORM-\gls{Framework}s \protect\footnotemark}   
   \label{fig:orm} 
 \end{figure}
+\footnotetext{vgl. Pascal Voitet in \cite{jctc}}
 
 Der wichtigste Vorteil eines \gls{Framework}s für die objektrelationale Abbildung liegt in der Abstrahierung von der Datenbank. Für die \gls{Business-Logik} gibt es keinen Unterschied zwischen Objekten aus der Datenbank und Objekten der Programmiersprache. Die Datenbank kann meist ohne Änderungen an der Applikation ausgetauscht werden.
 
